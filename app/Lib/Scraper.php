@@ -58,7 +58,7 @@ class Scraper
      * @param $selector
      * @return Collection
      */
-    protected function fetchFullContent(int $page = 1, $selector = '.package_body') : Collection
+    protected function fetchFullContent(int $page = 1, $selector = '.package') : Collection
     {
         $response = Http::asForm()->post($this->url, [
             'line' => '1',
