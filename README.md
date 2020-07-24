@@ -23,3 +23,5 @@ Password:	password
 
 Command for running parser:
  `php artisan parser:run`
+ 
+ Dump file stores in `storage/add/dump.txt`
