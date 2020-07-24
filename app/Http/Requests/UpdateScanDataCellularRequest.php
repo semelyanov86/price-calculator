@@ -68,6 +68,12 @@ class UpdateScanDataCellularRequest extends FormRequest
                 'min:-2147483648',
                 'max:2147483647',
             ],
+            'parser'                => [
+                'min:2',
+                'max:50',
+                'required',
+                'unique:scan_data_cellulars,parser,' . request()->route('scan_data_cellular')->id,
+            ],
         ];
     }
 }

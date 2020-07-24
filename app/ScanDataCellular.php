@@ -36,6 +36,7 @@ class ScanDataCellular extends Model
         'package_sim_connection_price',
         'package_min_lines',
         'package_change_price',
+        'parser',
         'created_at',
         'updated_at',
         'deleted_at',

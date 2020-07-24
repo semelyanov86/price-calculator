@@ -18,6 +18,7 @@ class CreateScanQueuesTable extends Migration
             $table->integer('response_code')->nullable();
             $table->longText('response_html')->nullable();
             $table->string('type')->nullable();
+            $table->integer('tries')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

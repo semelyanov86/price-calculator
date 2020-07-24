@@ -35,6 +35,7 @@ class ScanQueue extends Model
         'response_html',
         'type',
         'proxy_id',
+        'tries',
         'created_at',
         'updated_at',
         'deleted_at',

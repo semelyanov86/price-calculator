@@ -95,6 +95,8 @@ return [
             'deleted_at_helper'      => '',
             'proxy'                  => 'Proxy',
             'proxy_helper'           => '',
+            'tries'                  => 'Tries',
+            'tries_helper'           => 'Number of tries',
         ],
     ],
     'scanProxy'        => [
@@ -173,6 +175,8 @@ return [
             'updated_at_helper'                   => '',
             'deleted_at'                          => 'Deleted at',
             'deleted_at_helper'                   => '',
+            'parser'                              => 'Parser',
+            'parser_helper'                       => 'Parser ID field',
         ],
     ],
 ];

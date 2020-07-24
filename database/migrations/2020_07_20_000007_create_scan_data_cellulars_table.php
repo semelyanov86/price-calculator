@@ -24,6 +24,7 @@ class CreateScanDataCellularsTable extends Migration
             $table->decimal('package_sim_connection_price', 15, 2)->nullable();
             $table->integer('package_min_lines')->nullable();
             $table->decimal('package_change_price', 15, 2)->nullable();
+            $table->string('parser')->unique();
             $table->timestamps();
             $table->softDeletes();
         });
