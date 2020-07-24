@@ -61,15 +61,15 @@ class Scraper
     protected function fetchFullContent(int $page = 1, $selector = '.package') : Collection
     {
         $response = Http::asForm()->post($this->url, [
-            'line' => '1',
-            'price_lowertooltip' => '50',
+//            'line' => '1',
+//            'price_lowertooltip' => '50',
             'page' => $page,
             'compare_type' => 'phone',
-            'total' => 'n',
-            'package_maxgb' => '240',
-            'gb_uppertooltip' => '',
-            'gb_lowertooltip' => '',
-            'price_uppertooltip' => ''
+//            'total' => 'n',
+//            'package_maxgb' => '240',
+//            'gb_uppertooltip' => '',
+//            'gb_lowertooltip' => '',
+//            'price_uppertooltip' => ''
         ]);
         $result = collect([]);
         if ($response->ok()) {
