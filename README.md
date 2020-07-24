@@ -25,3 +25,7 @@ Command for running parser:
  `php artisan parser:run`
  
  Dump file stores in `storage/app/dump.txt`
+ 
+ Command for running parser schedule operation:
+ 
+`php artisan parser:schedule`

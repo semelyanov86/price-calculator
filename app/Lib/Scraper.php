@@ -2,6 +2,8 @@
 
 namespace App\Lib;
 
+use App\ScanQueue;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Http;
 use Symfony\Component\DomCrawler\Crawler;
@@ -19,6 +21,8 @@ use Symfony\Component\DomCrawler\Crawler;
  */
 class Scraper
 {
+    const ITEMS_PER_PAGE = 10;
+
     protected $url;
 
     public $results = [];
@@ -26,6 +30,8 @@ class Scraper
     public $savedItems = 0;
 
     public $status = 1;
+
+    protected $type = 'phone';
 
     public function __construct(string $url)
     {
@@ -44,7 +50,63 @@ class Scraper
             echo $page . '/n';
         }
         file_put_contents(config('filesystems.disks.local.root') . '/dump.txt', print_r($nodes, true));
+    }
 
+    /*
+     * schedule
+     *
+     * This method receive total number of items and calculates pages. Through this  number of pages we create cron tasks.
+     */
+    public function schedule($type = 'phone')
+    {
+        $this->type = $type;
+        $page = 1;
+        $crawler = $this->getCrawler($page);
+        if ($crawler) {
+            $items = $this->getTotalItems($crawler);
+        } else {
+            $items = 0;
+        }
+        $pages = $this->calcPages($items);
+        if ($pages > 0) {
+            for ($i = 1; $i <= $pages; $i++) {
+                $this->createSchedule($i);
+            }
+        }
+
+    }
+
+    private function calcPages(int $items) : int
+    {
+        $result = (int) ceil($items / self::ITEMS_PER_PAGE);
+        return $result;
+    }
+
+    private function getTotalItems(Crawler $crawler) : int
+    {
+        $items = $crawler->filter('#submit_button_package_total_number')->attr('value');
+        return (int) $items;
+    }
+
+    private function getCrawler(int $page = 1) : ?Crawler
+    {
+        $response = Http::asForm()->post($this->url, [
+//            'line' => '1',
+//            'price_lowertooltip' => '50',
+            'page' => $page,
+            'compare_type' => $this->type,
+//            'total' => 'n',
+//            'package_maxgb' => '240',
+//            'gb_uppertooltip' => '',
+//            'gb_lowertooltip' => '',
+//            'price_uppertooltip' => ''
+        ]);
+        if ($response->ok()) {
+            $data = $response->body();
+            $crawler = new Crawler($data);
+            return $crawler;
+        }
+        return null;
     }
 
 
@@ -60,21 +122,9 @@ class Scraper
      */
     protected function fetchFullContent(int $page = 1, $selector = '.package') : Collection
     {
-        $response = Http::asForm()->post($this->url, [
-//            'line' => '1',
-//            'price_lowertooltip' => '50',
-            'page' => $page,
-            'compare_type' => 'phone',
-//            'total' => 'n',
-//            'package_maxgb' => '240',
-//            'gb_uppertooltip' => '',
-//            'gb_lowertooltip' => '',
-//            'price_uppertooltip' => ''
-        ]);
+        $crawler = $this->getCrawler($page);
         $result = collect([]);
-        if ($response->ok()) {
-            $data = $response->body();
-            $crawler = new Crawler($data);
+        if ($crawler) {
             $packagesData = $crawler->filter($selector);
 
             $nodes = $packagesData->each(function (Crawler $node, $i) use (&$result) {
@@ -113,6 +163,26 @@ class Scraper
                 $this->savedItems++;
             }
         }
+    }
+
+    protected function getPayload(int $page) : array
+    {
+        return array(
+            'page' => $page,
+            'compare_type' => $this->type
+        );
+    }
+
+    protected function createSchedule(int $i) : ScanQueue
+    {
+        $schedule = new ScanQueue();
+        $schedule->scan_url = $this->url;
+        $schedule->type = $this->type;
+        $schedule->scan_parameters = json_encode($this->getPayload($i));
+        $schedule->scan_datetime = Carbon::now();
+        $schedule->scan_finished = 0;
+        $schedule->save();
+        return $schedule;
     }
 
 }

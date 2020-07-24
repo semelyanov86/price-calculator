@@ -2,24 +2,24 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Lib\Scraper;
+use Illuminate\Console\Command;
 
-class DoParser extends Command
+class ScheduleParsing extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'parser:run';
+    protected $signature = 'parser:schedule';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Running parser through console';
+    protected $description = 'Calculate total pages and create cron task for future parsing';
 
     /**
      * Create a new command instance.
@@ -39,6 +39,6 @@ class DoParser extends Command
     public function handle()
     {
         $scraper = new Scraper('https://www.smartcut.co.il/wp-content/themes/lmg/ajax/filterpackages.php');
-        $scraper->handle();
+        $scraper->schedule();
     }
 }
