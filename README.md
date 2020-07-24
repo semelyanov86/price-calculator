@@ -20,3 +20,6 @@ And that's it, go to your domain /admin and login:
 
 Username:	admin@admin.com
 Password:	password
+
+Command for running parser:
+ `php artisan parser:run`
