@@ -29,12 +29,6 @@
                             {{ trans('cruds.scanDataCellular.fields.date') }}
                         </th>
                         <th>
-                            {{ trans('cruds.scanDataCellular.fields.html') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.scanDataCellular.fields.html_changed') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.scanDataCellular.fields.html_changed_datetime') }}
                         </th>
                         <th>
@@ -86,12 +80,6 @@
                             </td>
                             <td>
                                 {{ $scanDataCellular->date ?? '' }}
-                            </td>
-                            <td>
-                                {{ $scanDataCellular->html ?? '' }}
-                            </td>
-                            <td>
-                                {{ $scanDataCellular->html_changed ?? '' }}
                             </td>
                             <td>
                                 {{ $scanDataCellular->html_changed_datetime ?? '' }}

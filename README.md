@@ -29,3 +29,7 @@ Command for running parser:
  Command for running parser schedule operation:
  
 `php artisan parser:schedule`
+
+Command for running parser and saving to DB operation:
+
+`php artisan parser:init`
