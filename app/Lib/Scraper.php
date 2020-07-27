@@ -80,7 +80,7 @@ class Scraper
     public function initQueue(ScanQueue $scanModel)
     {
         $params = json_decode($scanModel->scan_parameters, true);
-        $crawler = $this->getCrawler(0, $params);
+        $crawler = $this->getCrawler(0, $params, $scanModel->proxy);
         if ($crawler) {
             $data = $this->getFullModel($crawler);
             if ($data->isNotEmpty()) {
@@ -232,7 +232,7 @@ class Scraper
         return (int) $items;
     }
 
-    private function getCrawler(int $page = 1, array $params = array()) : ?Crawler
+    private function getCrawler(int $page = 1, array $params = array(), $proxy = false) : ?Crawler
     {
         if (empty($params)) {
             $params = [
@@ -247,7 +247,11 @@ class Scraper
 //            'price_uppertooltip' => ''
             ];
         }
-        $response = Http::asForm()->post($this->url, $params);
+        $options = array();
+        if ($proxy) {
+            $options['proxy'] = $proxy->proxy_ip . ':' . $proxy->port;
+        }
+        $response = Http::asForm()->withOptions($options)->post($this->url, $params);
         if ($response->ok()) {
             $data = $response->body();
             $crawler = new Crawler($data);
