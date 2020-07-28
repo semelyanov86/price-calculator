@@ -101,11 +101,11 @@
                     <span class="help-block">{{ trans('cruds.scanDataCellular.fields.package_gb_helper') }}</span>
                 </div>
                 <div class="form-group">
-                    <label for="package_month">{{ trans('cruds.scanDataCellular.fields.package_month') }}</label>
-                    <input class="form-control {{ $errors->has('package_month') ? 'is-invalid' : '' }}" type="number" name="package_month" id="package_month" value="{{ old('package_month', $scanDataCellular->package_month) }}" step="1">
-                    @if($errors->has('package_month'))
+                    <label for="package_month_price">{{ trans('cruds.scanDataCellular.fields.package_month') }}</label>
+                    <input class="form-control {{ $errors->has('package_month_price') ? 'is-invalid' : '' }}" type="number" name="package_month_price" id="package_month_price" value="{{ old('package_month_price', $scanDataCellular->package_month_price) }}" step="1">
+                    @if($errors->has('package_month_price'))
                         <div class="invalid-feedback">
-                            {{ $errors->first('package_month') }}
+                            {{ $errors->first('package_month_price') }}
                         </div>
                     @endif
                     <span class="help-block">{{ trans('cruds.scanDataCellular.fields.package_month_helper') }}</span>

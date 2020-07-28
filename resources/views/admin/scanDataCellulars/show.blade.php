@@ -100,7 +100,7 @@
                             {{ trans('cruds.scanDataCellular.fields.package_month') }}
                         </th>
                         <td>
-                            {{ $scanDataCellular->package_month }}
+                            {{ $scanDataCellular->package_month_price }}
                         </td>
                     </tr>
                     <tr>
