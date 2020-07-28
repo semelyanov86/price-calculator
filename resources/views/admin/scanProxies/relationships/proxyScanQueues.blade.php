@@ -52,6 +52,9 @@
                             {{ trans('cruds.scanQueue.fields.proxy') }}
                         </th>
                         <th>
+                            {{ trans('cruds.scanQueue.fields.tries') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -92,6 +95,9 @@
                             </td>
                             <td>
                                 {{ $scanQueue->proxy->proxy_ip ?? '' }}
+                            </td>
+                            <td>
+                                {{ $scanQueue->tries ?? '' }}
                             </td>
                             <td>
                                 @can('scan_queue_show')

@@ -38,6 +38,18 @@ class UpdateScanDataCellularRequest extends FormRequest
                 'min:2',
                 'max:50',
             ],
+            'parser'                => [
+                'min:2',
+                'max:50',
+                'required',
+                'unique:scan_data_cellulars,parser,' . request()->route('scan_data_cellular')->id,
+            ],
+            'package_min_lines'     => [
+                'nullable',
+                'integer',
+                'min:-2147483648',
+                'max:2147483647',
+            ],
             'package_minutes'       => [
                 'nullable',
                 'integer',
@@ -55,24 +67,6 @@ class UpdateScanDataCellularRequest extends FormRequest
                 'integer',
                 'min:-2147483648',
                 'max:2147483647',
-            ],
-            'package_month'         => [
-                'nullable',
-                'integer',
-                'min:-2147483648',
-                'max:2147483647',
-            ],
-            'package_min_lines'     => [
-                'nullable',
-                'integer',
-                'min:-2147483648',
-                'max:2147483647',
-            ],
-            'parser'                => [
-                'min:2',
-                'max:50',
-                'required',
-                'unique:scan_data_cellulars,parser,' . request()->route('scan_data_cellular')->id,
             ],
         ];
     }

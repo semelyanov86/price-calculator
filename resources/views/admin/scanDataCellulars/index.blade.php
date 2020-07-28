@@ -1,23 +1,23 @@
 @extends('layouts.admin')
 @section('content')
-    @can('scan_data_cellular_create')
-        <div style="margin-bottom: 10px;" class="row">
-            <div class="col-lg-12">
-                <a class="btn btn-success" href="{{ route('admin.scan-data-cellulars.create') }}">
-                    {{ trans('global.add') }} {{ trans('cruds.scanDataCellular.title_singular') }}
-                </a>
-            </div>
+@can('scan_data_cellular_create')
+    <div style="margin-bottom: 10px;" class="row">
+        <div class="col-lg-12">
+            <a class="btn btn-success" href="{{ route('admin.scan-data-cellulars.create') }}">
+                {{ trans('global.add') }} {{ trans('cruds.scanDataCellular.title_singular') }}
+            </a>
         </div>
-    @endcan
-    <div class="card">
-        <div class="card-header">
-            {{ trans('cruds.scanDataCellular.title_singular') }} {{ trans('global.list') }}
-        </div>
+    </div>
+@endcan
+<div class="card">
+    <div class="card-header">
+        {{ trans('cruds.scanDataCellular.title_singular') }} {{ trans('global.list') }}
+    </div>
 
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class=" table table-bordered table-striped table-hover datatable datatable-ScanDataCellular">
-                    <thead>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-ScanDataCellular">
+                <thead>
                     <tr>
                         <th width="10">
 
@@ -38,6 +38,18 @@
                             {{ trans('cruds.scanDataCellular.fields.package_name') }}
                         </th>
                         <th>
+                            {{ trans('cruds.scanDataCellular.fields.parser') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.scanDataCellular.fields.package_month_price') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.scanDataCellular.fields.html_changed') }}
+                        </th>
+                        <th>
+                            {{ trans('cruds.scanDataCellular.fields.package_min_lines') }}
+                        </th>
+                        <th>
                             {{ trans('cruds.scanDataCellular.fields.package_minutes') }}
                         </th>
                         <th>
@@ -47,29 +59,17 @@
                             {{ trans('cruds.scanDataCellular.fields.package_gb') }}
                         </th>
                         <th>
-                            {{ trans('cruds.scanDataCellular.fields.package_month') }}
-                        </th>
-                        <th>
                             {{ trans('cruds.scanDataCellular.fields.package_sim_price') }}
                         </th>
                         <th>
                             {{ trans('cruds.scanDataCellular.fields.package_sim_connection_price') }}
                         </th>
                         <th>
-                            {{ trans('cruds.scanDataCellular.fields.package_min_lines') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.scanDataCellular.fields.package_change_price') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.scanDataCellular.fields.parser') }}
-                        </th>
-                        <th>
                             &nbsp;
                         </th>
                     </tr>
-                    </thead>
-                    <tbody>
+                </thead>
+                <tbody>
                     @foreach($scanDataCellulars as $key => $scanDataCellular)
                         <tr data-entry-id="{{ $scanDataCellular->id }}">
                             <td>
@@ -91,6 +91,19 @@
                                 {{ $scanDataCellular->package_name ?? '' }}
                             </td>
                             <td>
+                                {{ $scanDataCellular->parser ?? '' }}
+                            </td>
+                            <td>
+                                {{ $scanDataCellular->package_month_price ?? '' }}
+                            </td>
+                            <td>
+                                <span style="display:none">{{ $scanDataCellular->html_changed ?? '' }}</span>
+                                <input type="checkbox" disabled="disabled" {{ $scanDataCellular->html_changed ? 'checked' : '' }}>
+                            </td>
+                            <td>
+                                {{ $scanDataCellular->package_min_lines ?? '' }}
+                            </td>
+                            <td>
                                 {{ $scanDataCellular->package_minutes ?? '' }}
                             </td>
                             <td>
@@ -100,22 +113,10 @@
                                 {{ $scanDataCellular->package_gb ?? '' }}
                             </td>
                             <td>
-                                {{ $scanDataCellular->package_month_price ?? '' }}
-                            </td>
-                            <td>
                                 {{ $scanDataCellular->package_sim_price ?? '' }}
                             </td>
                             <td>
                                 {{ $scanDataCellular->package_sim_connection_price ?? '' }}
-                            </td>
-                            <td>
-                                {{ $scanDataCellular->package_min_lines ?? '' }}
-                            </td>
-                            <td>
-                                {{ $scanDataCellular->package_change_price ?? '' }}
-                            </td>
-                            <td>
-                                {{ $scanDataCellular->parser ?? '' }}
                             </td>
                             <td>
                                 @can('scan_data_cellular_show')
@@ -142,62 +143,62 @@
 
                         </tr>
                     @endforeach
-                    </tbody>
-                </table>
-            </div>
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 
 
 
 @endsection
 @section('scripts')
-    @parent
-    <script>
-        $(function () {
-            let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-                @can('scan_data_cellular_delete')
-            let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
-            let deleteButton = {
-                text: deleteButtonTrans,
-                url: "{{ route('admin.scan-data-cellulars.massDestroy') }}",
-                className: 'btn-danger',
-                action: function (e, dt, node, config) {
-                    var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
-                        return $(entry).data('entry-id')
-                    });
+@parent
+<script>
+    $(function () {
+  let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
+@can('scan_data_cellular_delete')
+  let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
+  let deleteButton = {
+    text: deleteButtonTrans,
+    url: "{{ route('admin.scan-data-cellulars.massDestroy') }}",
+    className: 'btn-danger',
+    action: function (e, dt, node, config) {
+      var ids = $.map(dt.rows({ selected: true }).nodes(), function (entry) {
+          return $(entry).data('entry-id')
+      });
 
-                    if (ids.length === 0) {
-                        alert('{{ trans('global.datatables.zero_selected') }}')
+      if (ids.length === 0) {
+        alert('{{ trans('global.datatables.zero_selected') }}')
 
-                        return
-                    }
+        return
+      }
 
-                    if (confirm('{{ trans('global.areYouSure') }}')) {
-                        $.ajax({
-                            headers: {'x-csrf-token': _token},
-                            method: 'POST',
-                            url: config.url,
-                            data: { ids: ids, _method: 'DELETE' }})
-                            .done(function () { location.reload() })
-                    }
-                }
-            }
-            dtButtons.push(deleteButton)
-            @endcan
+      if (confirm('{{ trans('global.areYouSure') }}')) {
+        $.ajax({
+          headers: {'x-csrf-token': _token},
+          method: 'POST',
+          url: config.url,
+          data: { ids: ids, _method: 'DELETE' }})
+          .done(function () { location.reload() })
+      }
+    }
+  }
+  dtButtons.push(deleteButton)
+@endcan
 
-            $.extend(true, $.fn.dataTable.defaults, {
-                orderCellsTop: true,
-                order: [[ 1, 'desc' ]],
-                pageLength: 100,
-            });
-            let table = $('.datatable-ScanDataCellular:not(.ajaxTable)').DataTable({ buttons: dtButtons })
-            $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
-                $($.fn.dataTable.tables(true)).DataTable()
-                    .columns.adjust();
-            });
+  $.extend(true, $.fn.dataTable.defaults, {
+    orderCellsTop: true,
+    order: [[ 1, 'desc' ]],
+    pageLength: 100,
+  });
+  let table = $('.datatable-ScanDataCellular:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
+      $($.fn.dataTable.tables(true)).DataTable()
+          .columns.adjust();
+  });
+  
+})
 
-        })
-
-    </script>
+</script>
 @endsection

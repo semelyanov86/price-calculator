@@ -1,20 +1,20 @@
 @extends('layouts.admin')
 @section('content')
 
-    <div class="card">
-        <div class="card-header">
-            {{ trans('global.show') }} {{ trans('cruds.scanDataCellular.title') }}
-        </div>
+<div class="card">
+    <div class="card-header">
+        {{ trans('global.show') }} {{ trans('cruds.scanDataCellular.title') }}
+    </div>
 
-        <div class="card-body">
+    <div class="card-body">
+        <div class="form-group">
             <div class="form-group">
-                <div class="form-group">
-                    <a class="btn btn-default" href="{{ route('admin.scan-data-cellulars.index') }}">
-                        {{ trans('global.back_to_list') }}
-                    </a>
-                </div>
-                <table class="table table-bordered table-striped">
-                    <tbody>
+                <a class="btn btn-default" href="{{ route('admin.scan-data-cellulars.index') }}">
+                    {{ trans('global.back_to_list') }}
+                </a>
+            </div>
+            <table class="table table-bordered table-striped">
+                <tbody>
                     <tr>
                         <th>
                             {{ trans('cruds.scanDataCellular.fields.id') }}
@@ -37,14 +37,6 @@
                         </th>
                         <td>
                             {{ $scanDataCellular->html }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.scanDataCellular.fields.html_changed') }}
-                        </th>
-                        <td>
-                            {{ $scanDataCellular->html_changed }}
                         </td>
                     </tr>
                     <tr>
@@ -73,6 +65,46 @@
                     </tr>
                     <tr>
                         <th>
+                            {{ trans('cruds.scanDataCellular.fields.package_change_price') }}
+                        </th>
+                        <td>
+                            {{ $scanDataCellular->package_change_price }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.scanDataCellular.fields.parser') }}
+                        </th>
+                        <td>
+                            {{ $scanDataCellular->parser }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.scanDataCellular.fields.package_month_price') }}
+                        </th>
+                        <td>
+                            {{ $scanDataCellular->package_month_price }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.scanDataCellular.fields.html_changed') }}
+                        </th>
+                        <td>
+                            <input type="checkbox" disabled="disabled" {{ $scanDataCellular->html_changed ? 'checked' : '' }}>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.scanDataCellular.fields.package_min_lines') }}
+                        </th>
+                        <td>
+                            {{ $scanDataCellular->package_min_lines }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
                             {{ trans('cruds.scanDataCellular.fields.package_minutes') }}
                         </th>
                         <td>
@@ -97,14 +129,6 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.scanDataCellular.fields.package_month') }}
-                        </th>
-                        <td>
-                            {{ $scanDataCellular->package_month_price }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
                             {{ trans('cruds.scanDataCellular.fields.package_sim_price') }}
                         </th>
                         <td>
@@ -119,40 +143,16 @@
                             {{ $scanDataCellular->package_sim_connection_price }}
                         </td>
                     </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.scanDataCellular.fields.package_min_lines') }}
-                        </th>
-                        <td>
-                            {{ $scanDataCellular->package_min_lines }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.scanDataCellular.fields.package_change_price') }}
-                        </th>
-                        <td>
-                            {{ $scanDataCellular->package_change_price }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.scanDataCellular.fields.parser') }}
-                        </th>
-                        <td>
-                            {{ $scanDataCellular->parser }}
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <div class="form-group">
-                    <a class="btn btn-default" href="{{ route('admin.scan-data-cellulars.index') }}">
-                        {{ trans('global.back_to_list') }}
-                    </a>
-                </div>
+                </tbody>
+            </table>
+            <div class="form-group">
+                <a class="btn btn-default" href="{{ route('admin.scan-data-cellulars.index') }}">
+                    {{ trans('global.back_to_list') }}
+                </a>
             </div>
         </div>
     </div>
+</div>
 
 
 
