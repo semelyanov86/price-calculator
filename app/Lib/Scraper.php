@@ -110,7 +110,8 @@ class Scraper
                         $item->push(['html_changed' => $html]);
                         $item->push(['html_changed_datetime' => Carbon::now()->format('Y-m-d H:i:s')]);
                     }
-                    return $scanDataModel->update($item->toArray());
+                    $scanDataModel->update($item->toArray());
+                    return $scanDataModel;
                 } else {
                     return ScanDataCellular::create($item->toArray());
                 }
