@@ -56,12 +56,6 @@ class StoreScanDataCellularRequest extends FormRequest
                 'min:-2147483648',
                 'max:2147483647',
             ],
-            'package_month'         => [
-                'nullable',
-                'integer',
-                'min:-2147483648',
-                'max:2147483647',
-            ],
             'package_min_lines'     => [
                 'nullable',
                 'integer',

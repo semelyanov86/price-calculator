@@ -107,8 +107,11 @@ class Scraper
                 if ($scanDataModel) {
                     $html = $item->get('html');
                     if ($html !== $scanDataModel->html) {
-                        $item->push(['html_changed' => $html]);
-                        $item->push(['html_changed_datetime' => Carbon::now()->format('Y-m-d H:i:s')]);
+                        $dataArray = $item->toArray();
+                        $dataArray['html_changed'] = $html;
+                        $dataArray['html_changed_datetime'] = Carbon::now()->format('Y-m-d H:i:s');
+                    } else {
+                        $dataArray = $item->toArray();
                     }
                     $scanDataModel->update($item->toArray());
                     return $scanDataModel;

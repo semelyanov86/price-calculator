@@ -100,7 +100,7 @@
                                 {{ $scanDataCellular->package_gb ?? '' }}
                             </td>
                             <td>
-                                {{ $scanDataCellular->package_month ?? '' }}
+                                {{ $scanDataCellular->package_month_price ?? '' }}
                             </td>
                             <td>
                                 {{ $scanDataCellular->package_sim_price ?? '' }}
