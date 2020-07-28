@@ -108,10 +108,12 @@ class Scraper
                     $html = $item->get('html');
                     if ($html !== $scanDataModel->html) {
                         $dataArray = $item->toArray();
-                        $dataArray['html_changed'] = $html;
+                        $dataArray['html'] = $html;
+                        $dataArray['html_changed'] = 1;
                         $dataArray['html_changed_datetime'] = Carbon::now()->format('Y-m-d H:i:s');
                     } else {
                         $dataArray = $item->toArray();
+                        $dataArray['html_changed'] = 0;
                     }
                     $scanDataModel->update($item->toArray());
                     return $scanDataModel;
@@ -126,7 +128,7 @@ class Scraper
     {
         $result = collect([]);
         $datas = $crawler->filter('.package')->each(function (Crawler $package, $i) use ($result) {
-            $simPrice = $this->getPackageSimPrice($package);
+            $simPrice = $this->getFloat($this->getPackageSimPrice($package));
             $idCollect = $package->filter('.share-btn');
             if ($idCollect->count() > 0) {
                 $id = $idCollect->first()->attr('data-target');
@@ -153,25 +155,25 @@ class Scraper
             }
             $gbCollect = $package->filter('.item-cluster')->first()->filter('.logo1');
             if ($gbCollect->count() > 0) {
-                $gb = $gbCollect->text();
+                $gb = $this->convertToInt($gbCollect->text());
             } else {
                 $gb = null;
             }
             $minutesCollection = $package->filter('.item-cluster')->first()->filter('.logo2');
             if ($minutesCollection->count() > 0) {
-                $minutes = $minutesCollection->text();
+                $minutes = $this->convertToInt($minutesCollection->text());
             } else {
                 $minutes = null;
             }
             $smsCollection = $package->filter('.item-cluster')->first()->filter('.logo3');
             if ($smsCollection->count() > 0) {
-                $sms = $smsCollection->text();
+                $sms = $this->convertToInt($smsCollection->text());
             } else {
                 $sms = null;
             }
             $simCollection = $package->filter('.item-cluster')->first()->filter('.logo4');
             if ($simCollection->count() > 0) {
-                $sim = $simCollection->text();
+                $sim = $this->convertToInt($simCollection->text());
             } else {
                 $sim = null;
             }
@@ -341,6 +343,28 @@ class Scraper
         $schedule->tries = 0;
         $schedule->save();
         return $schedule;
+    }
+
+    private function convertToInt(string $s) : int
+    {
+        if ($s === 'ללא הגבלה') {
+            return 100000;
+        }
+        return (int)preg_replace('/[^\-\d]*(\-?\d*).*/','$1',$s);
+    }
+
+    private function getFloat(string $str) : float
+    {
+        if(strstr($str, ",")) {
+            $str = str_replace(".", "", $str); // replace dots (thousand seps) with blancs
+            $str = str_replace(",", ".", $str); // replace ',' with '.'
+        }
+
+        if(preg_match("#([0-9\.]+)#", $str, $match)) { // search for number that may contain '.'
+            return floatval($match[0]);
+        } else {
+            return floatval($str); // take some last chances with floatval
+        }
     }
 
 }

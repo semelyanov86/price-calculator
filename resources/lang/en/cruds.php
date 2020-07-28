@@ -162,6 +162,7 @@ return [
             'parser'                              => 'Parser',
             'parser_helper'                       => 'Parser ID field',
             'package_month_price'                 => 'Package Month Price',
+            'package_month'                 => 'Package Month Price',
             'package_month_price_helper'          => 'Price per month for package',
             'html_changed'                        => 'Html Changed',
             'html_changed_helper'                 => 'Is html changed',
