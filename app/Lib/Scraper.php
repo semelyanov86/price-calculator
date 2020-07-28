@@ -2,6 +2,7 @@
 
 namespace App\Lib;
 
+use App\Jobs\ScanDataChangedNotification;
 use App\ScanDataCellular;
 use App\ScanQueue;
 use Illuminate\Support\Carbon;
@@ -111,6 +112,7 @@ class Scraper
                         $dataArray['html'] = $html;
                         $dataArray['html_changed'] = 1;
                         $dataArray['html_changed_datetime'] = Carbon::now()->format('Y-m-d H:i:s');
+                        ScanDataChangedNotification::dispatchNow($scanDataModel);
                     } else {
                         $dataArray = $item->toArray();
                         $dataArray['html_changed'] = 0;
