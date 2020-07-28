@@ -40,8 +40,10 @@ class InitParsing extends Command
     public function handle()
     {
         $scanModel = $this->getFirstQueue();
-        $scanModel->tries = $scanModel->tries + 1;
-        $scanModel->save();
+        if ($scanModel) {
+            $scanModel->tries = $scanModel->tries + 1;
+            $scanModel->save();
+        }
         if ($scanModel) {
             $scraper = new Scraper($scanModel->scan_url);
             $scraper->initQueue($scanModel);
