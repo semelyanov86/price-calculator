@@ -49,3 +49,6 @@ Route::group(['prefix' => 'profile', 'as' => 'profile.', 'namespace' => 'Auth', 
         Route::post('password', 'ChangePasswordController@update')->name('password.update');
     }
 });
+
+Route::get('/phone', 'MainController@index')->name('phone.index');
+Route::get('/phone/{data}', 'MainController@show')->name('phone.show');

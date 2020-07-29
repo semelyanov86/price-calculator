@@ -52,6 +52,21 @@ class ScanDataCellular extends Model
         return $value ? Carbon::parse($value)->format(config('panel.date_format')) : null;
     }
 
+    public function scopeFiltering($query, array $filters, int $i)
+    {
+        if ($filters['gb'][$i]) {
+            $query->where('package_gb', '>=', $filters['gb'][$i]);
+        }
+        if ($filters['minutes'][$i]) {
+            $query->where('package_minutes', '>=', $filters['minutes'][$i]);
+        }
+        if ($filters['sms'][$i]) {
+            $query->where('package_sms', '>=', $filters['sms'][$i]);
+        }
+        $query->where('package_min_lines', '<=', $filters['lines']);
+        return $query;
+    }
+
     public function setDateAttribute($value)
     {
         $this->attributes['date'] = $value ? Carbon::createFromFormat(config('panel.date_format'), $value)->format('Y-m-d') : null;

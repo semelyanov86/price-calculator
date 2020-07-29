@@ -33,3 +33,7 @@ Command for running parser:
 Command for running parser and saving to DB operation:
 
 `php artisan parser:init`
+
+To get filter form, go to route:
+
+`/phones`

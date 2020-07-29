@@ -22,3 +22,5 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
     // Scan Data Cellulars
     Route::apiResource('scan-data-cellulars', 'ScanDataCellularApiController');
 });
+
+Route::post('/data', 'Api\\UserDataController@store')->name('data.store');
