@@ -2231,9 +2231,9 @@ __webpack_require__.r(__webpack_exports__);
       var id = parseInt(this.id);
 
       if (id && id > 0) {
-        return 'api/data/' + id;
+        return '/api/data/' + id;
       } else {
-        return 'api/data';
+        return '/api/data';
       }
     }
   },

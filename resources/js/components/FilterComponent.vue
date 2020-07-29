@@ -134,9 +134,9 @@
             getUrl() {
                 const id = parseInt(this.id)
                 if (id && id > 0) {
-                    return 'api/data/' + id;
+                    return '/api/data/' + id;
                 } else {
-                    return 'api/data';
+                    return '/api/data';
                 }
             }
         },
