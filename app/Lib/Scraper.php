@@ -117,7 +117,10 @@ class Scraper
                         $dataArray = $item->toArray();
                         $dataArray['html_changed'] = 0;
                     }
-                    $scanDataModel->update($item->toArray());
+                    if ($scanDataModel->package_min_lines) {
+                        unset($dataArray['package_min_lines']);
+                    }
+                    $scanDataModel->update($dataArray);
                     return $scanDataModel;
                 } else {
                     return ScanDataCellular::create($item->toArray());
