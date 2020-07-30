@@ -38925,7 +38925,7 @@ var render = function() {
                   staticClass: "form-control",
                   attrs: {
                     id: "roaming" + cur,
-                    type: "text",
+                    type: "number",
                     name: "roaming[]"
                   },
                   domProps: { value: _vm.roaming[cur] },
