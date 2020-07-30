@@ -65,7 +65,9 @@ class ScanDataCellular extends Model
             $query->where('package_sms', '>=', $filters['sms'][$i]);
         }
         if ($filters['roaming'][$i]) {
-            $query->where('minutes_to_other_countries', '>=', $filters['roaming'][$i]);
+            $query->where(function($query) use ($filters, $i){
+                return $query->where('minutes_to_other_countries', '>=', $filters['roaming'][$i])->orWhereNull('minutes_to_other_countries');
+            });
         }
         $query->where('package_min_lines', '<=', $filters['lines']);
         return $query;
