@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="form-group col-md-2">
-                    <label :for="'roaming' + cur">Roaming</label>
+                    <label :for="'roaming' + cur">Calls to other countries</label>
                     <input :id="'roaming' + cur" type="number" class="form-control" name="roaming[]" v-model="roaming[cur]">
                     <div class="alert alert-danger" v-if="errors && errors.roaming">
                         {{ errors.roaming[0] }}

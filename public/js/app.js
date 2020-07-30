@@ -38910,7 +38910,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-2" }, [
                 _c("label", { attrs: { for: "roaming" + cur } }, [
-                  _vm._v("Roaming")
+                  _vm._v("Calls to other countries")
                 ]),
                 _vm._v(" "),
                 _c("input", {
