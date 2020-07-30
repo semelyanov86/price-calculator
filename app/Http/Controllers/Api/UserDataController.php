@@ -21,4 +21,15 @@ class UserDataController extends Controller
         $userDataModel->save();
         return new UserDataResource($userDataModel);
     }
+
+    public function update(StoreUserDataApiRequest $request, UserData $data)
+    {
+        $userDataModel = $data;
+        $userDataModel->type = $request->get('type');
+        $params = $request->validated();
+        unset($params['type']);
+        $userDataModel->data = json_encode($params);
+        $userDataModel->save();
+        return new UserDataResource($userDataModel);
+    }
 }
