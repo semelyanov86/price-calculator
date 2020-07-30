@@ -162,7 +162,6 @@ return [
             'parser'                              => 'Parser',
             'parser_helper'                       => 'Parser ID field',
             'package_month_price'                 => 'Package Month Price',
-            'package_month'                 => 'Package Month Price',
             'package_month_price_helper'          => 'Price per month for package',
             'html_changed'                        => 'Html Changed',
             'html_changed_helper'                 => 'Is html changed',
@@ -178,6 +177,8 @@ return [
             'package_sim_price_helper'            => '',
             'package_sim_connection_price'        => 'Package Sim Connection Price',
             'package_sim_connection_price_helper' => '',
+            'minutes_to_other_countries'          => 'Minutes To Other Countries',
+            'minutes_to_other_countries_helper'   => '',
         ],
     ],
 ];

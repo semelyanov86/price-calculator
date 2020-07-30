@@ -2023,6 +2023,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DisplayVueComponent",
   props: {
@@ -38479,6 +38483,16 @@ var render = function() {
                   _vm._v(" "),
                   _c("td", [
                     _vm._v(_vm._s(_vm.item.package_sim_connection_price))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("tr", [
+                  _c("th", { attrs: { scope: "row" } }, [
+                    _vm._v("Minutes to other countries")
+                  ]),
+                  _vm._v(" "),
+                  _c("td", [
+                    _vm._v(_vm._s(_vm.item.minutes_to_other_countries))
                   ])
                 ])
               ])

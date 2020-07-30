@@ -105,6 +105,10 @@
                         <th scope="row">Package Sim Connection Price</th>
                         <td>{{item.package_sim_connection_price}}</td>
                     </tr>
+                    <tr>
+                        <th scope="row">Minutes to other countries</th>
+                        <td>{{item.minutes_to_other_countries}}</td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

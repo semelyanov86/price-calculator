@@ -37,6 +37,7 @@ class ScanDataCellular extends Model
         'package_gb',
         'package_sim_price',
         'package_sim_connection_price',
+        'minutes_to_other_countries',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -62,6 +63,9 @@ class ScanDataCellular extends Model
         }
         if ($filters['sms'][$i]) {
             $query->where('package_sms', '>=', $filters['sms'][$i]);
+        }
+        if ($filters['roaming'][$i]) {
+            $query->where('minutes_to_other_countries', '>=', $filters['roaming'][$i]);
         }
         $query->where('package_min_lines', '<=', $filters['lines']);
         return $query;
