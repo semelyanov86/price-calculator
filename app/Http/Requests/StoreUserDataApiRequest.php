@@ -31,7 +31,8 @@ class StoreUserDataApiRequest extends FormRequest
             'minutes' => 'required|array',
             'phone' => 'required|array',
             'roaming' => 'required|array',
-            'sms' => 'required|array'
+            'sms' => 'required|array',
+            'price' => 'required|array'
         ];
     }
 }

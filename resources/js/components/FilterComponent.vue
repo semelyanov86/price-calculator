@@ -28,14 +28,14 @@
                 </div>
             </div>
             <div class="form-row" v-for="cur in lines">
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     <label :for="'phone' + cur">Phone number</label>
                     <input :id="'phone' + cur" type="tel" class="form-control" name="phone[]" v-model="phone[cur]">
                     <div class="alert alert-danger" v-if="errors && errors.phone">
                         {{ errors.phone[0] }}
                     </div>
                 </div>
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-2">
                     <label :for="'minutes' + cur">Number of minutes</label>
                     <input :id="'minutes' + cur" type="number" class="form-control" name="minutes[]" v-model="minutes[cur]">
                     <div class="alert alert-danger" v-if="errors && errors.minutes">
@@ -63,6 +63,13 @@
                         {{ errors.roaming[0] }}
                     </div>
                 </div>
+                <div class="form-group col-md-2">
+                    <label :for="'price' + cur">Your current price</label>
+                    <input :id="'price' + cur" type="number" class="form-control" name="price[]" v-model="price[cur]">
+                    <div class="alert alert-danger" v-if="errors && errors.price">
+                        {{ errors.price[0] }}
+                    </div>
+                </div>
             </div>
             <button class="btn btn-primary" type="submit">Search</button>
         </form>
@@ -86,6 +93,7 @@
                 sms: [null, null],
                 gb: [null, null],
                 roaming: [null, null],
+                price: [null, null],
                 isLoading: false,
                 record: null,
                 fullPage: true,
@@ -128,7 +136,8 @@
                     'minutes' : this.minutes,
                     'sms' : this.sms,
                     'gb' : this.gb,
-                    'roaming' : this.roaming
+                    'roaming' : this.roaming,
+                    'price' : this.price
                 }
             },
             getUrl() {
@@ -159,6 +168,9 @@
                     }
                     if (!this.roaming[i]) {
                         this.roaming[i] = null
+                    }
+                    if (!this.price[i]) {
+                        this.price[i] = null
                     }
                 }
             },

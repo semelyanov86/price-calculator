@@ -2170,6 +2170,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -2186,6 +2193,7 @@ __webpack_require__.r(__webpack_exports__);
       sms: [null, null],
       gb: [null, null],
       roaming: [null, null],
+      price: [null, null],
       isLoading: false,
       record: null,
       fullPage: true,
@@ -2228,7 +2236,8 @@ __webpack_require__.r(__webpack_exports__);
         'minutes': this.minutes,
         'sms': this.sms,
         'gb': this.gb,
-        'roaming': this.roaming
+        'roaming': this.roaming,
+        'price': this.price
       };
     },
     getUrl: function getUrl() {
@@ -2265,6 +2274,10 @@ __webpack_require__.r(__webpack_exports__);
 
         if (!this.roaming[i]) {
           this.roaming[i] = null;
+        }
+
+        if (!this.price[i]) {
+          this.price[i] = null;
         }
       }
     },
@@ -38756,7 +38769,7 @@ var render = function() {
           _vm._v(" "),
           _vm._l(_vm.lines, function(cur) {
             return _c("div", { staticClass: "form-row" }, [
-              _c("div", { staticClass: "form-group col-md-3" }, [
+              _c("div", { staticClass: "form-group col-md-2" }, [
                 _c("label", { attrs: { for: "phone" + cur } }, [
                   _vm._v("Phone number")
                 ]),
@@ -38794,7 +38807,7 @@ var render = function() {
                   : _vm._e()
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "form-group col-md-3" }, [
+              _c("div", { staticClass: "form-group col-md-2" }, [
                 _c("label", { attrs: { for: "minutes" + cur } }, [
                   _vm._v("Number of minutes")
                 ]),
@@ -38944,6 +38957,44 @@ var render = function() {
                       _vm._v(
                         "\n                    " +
                           _vm._s(_vm.errors.roaming[0]) +
+                          "\n                "
+                      )
+                    ])
+                  : _vm._e()
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group col-md-2" }, [
+                _c("label", { attrs: { for: "price" + cur } }, [
+                  _vm._v("Your current price")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.price[cur],
+                      expression: "price[cur]"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: { id: "price" + cur, type: "number", name: "price[]" },
+                  domProps: { value: _vm.price[cur] },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.price, cur, $event.target.value)
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _vm.errors && _vm.errors.price
+                  ? _c("div", { staticClass: "alert alert-danger" }, [
+                      _vm._v(
+                        "\n                    " +
+                          _vm._s(_vm.errors.price[0]) +
                           "\n                "
                       )
                     ])
