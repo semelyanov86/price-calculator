@@ -3,13 +3,13 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.show') }} {{ trans('cruds.scanDataCellular.title') }}
+        {{ trans('global.show') }} {{ trans('cruds.scanQueue.title') }}
     </div>
 
     <div class="card-body">
         <div class="form-group">
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.scan-data-cellulars.index') }}">
+                <a class="btn btn-default" href="{{ route('admin.scan-queues.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>
@@ -17,144 +17,96 @@
                 <tbody>
                     <tr>
                         <th>
-                            {{ trans('cruds.scanDataCellular.fields.id') }}
+                            {{ trans('cruds.scanQueue.fields.id') }}
                         </th>
                         <td>
-                            {{ $scanDataCellular->id }}
+                            {{ $scanQueue->id }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.scanDataCellular.fields.date') }}
+                            {{ trans('cruds.scanQueue.fields.scan_url') }}
                         </th>
                         <td>
-                            {{ $scanDataCellular->date }}
+                            {{ $scanQueue->scan_url }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.scanDataCellular.fields.html') }}
+                            {{ trans('cruds.scanQueue.fields.scan_parameters') }}
                         </th>
                         <td>
-                            {{ $scanDataCellular->html }}
+                            {{ $scanQueue->scan_parameters }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.scanDataCellular.fields.html_changed_datetime') }}
+                            {{ trans('cruds.scanQueue.fields.scan_finished') }}
                         </th>
                         <td>
-                            {{ $scanDataCellular->html_changed_datetime }}
+                            <input type="checkbox" disabled="disabled" {{ $scanQueue->scan_finished ? 'checked' : '' }}>
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.scanDataCellular.fields.provider_name') }}
+                            {{ trans('cruds.scanQueue.fields.scan_datetime') }}
                         </th>
                         <td>
-                            {{ $scanDataCellular->provider_name }}
+                            {{ $scanQueue->scan_datetime }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.scanDataCellular.fields.package_name') }}
+                            {{ trans('cruds.scanQueue.fields.request') }}
                         </th>
                         <td>
-                            {{ $scanDataCellular->package_name }}
+                            {{ $scanQueue->request }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.scanDataCellular.fields.package_change_price') }}
+                            {{ trans('cruds.scanQueue.fields.response_code') }}
                         </th>
                         <td>
-                            {{ $scanDataCellular->package_change_price }}
+                            {{ $scanQueue->response_code }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.scanDataCellular.fields.parser') }}
+                            {{ trans('cruds.scanQueue.fields.response_html') }}
                         </th>
                         <td>
-                            {{ $scanDataCellular->parser }}
+                            {{ $scanQueue->response_html }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.scanDataCellular.fields.package_month_price') }}
+                            {{ trans('cruds.scanQueue.fields.type') }}
                         </th>
                         <td>
-                            {{ $scanDataCellular->package_month_price }}
+                            {{ App\ScanQueue::TYPE_SELECT[$scanQueue->type] ?? '' }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.scanDataCellular.fields.html_changed') }}
+                            {{ trans('cruds.scanQueue.fields.proxy') }}
                         </th>
                         <td>
-                            <input type="checkbox" disabled="disabled" {{ $scanDataCellular->html_changed ? 'checked' : '' }}>
+                            {{ $scanQueue->proxy->proxy_ip ?? '' }}
                         </td>
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.scanDataCellular.fields.package_min_lines') }}
+                            {{ trans('cruds.scanQueue.fields.tries') }}
                         </th>
                         <td>
-                            {{ $scanDataCellular->package_min_lines }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.scanDataCellular.fields.package_minutes') }}
-                        </th>
-                        <td>
-                            {{ $scanDataCellular->package_minutes }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.scanDataCellular.fields.package_sms') }}
-                        </th>
-                        <td>
-                            {{ $scanDataCellular->package_sms }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.scanDataCellular.fields.package_gb') }}
-                        </th>
-                        <td>
-                            {{ $scanDataCellular->package_gb }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.scanDataCellular.fields.package_sim_price') }}
-                        </th>
-                        <td>
-                            {{ $scanDataCellular->package_sim_price }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.scanDataCellular.fields.package_sim_connection_price') }}
-                        </th>
-                        <td>
-                            {{ $scanDataCellular->package_sim_connection_price }}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th>
-                            {{ trans('cruds.scanDataCellular.fields.minutes_to_other_countries') }}
-                        </th>
-                        <td>
-                            {{ $scanDataCellular->minutes_to_other_countries }}
+                            {{ $scanQueue->tries }}
                         </td>
                     </tr>
                 </tbody>
             </table>
             <div class="form-group">
-                <a class="btn btn-default" href="{{ route('admin.scan-data-cellulars.index') }}">
+                <a class="btn btn-default" href="{{ route('admin.scan-queues.index') }}">
                     {{ trans('global.back_to_list') }}
                 </a>
             </div>

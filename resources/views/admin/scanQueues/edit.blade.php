@@ -3,175 +3,124 @@
 
 <div class="card">
     <div class="card-header">
-        {{ trans('global.edit') }} {{ trans('cruds.scanDataCellular.title_singular') }}
+        {{ trans('global.edit') }} {{ trans('cruds.scanQueue.title_singular') }}
     </div>
 
     <div class="card-body">
-        <form method="POST" action="{{ route("admin.scan-data-cellulars.update", [$scanDataCellular->id]) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route("admin.scan-queues.update", [$scanQueue->id]) }}" enctype="multipart/form-data">
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label class="required" for="date">{{ trans('cruds.scanDataCellular.fields.date') }}</label>
-                <input class="form-control date {{ $errors->has('date') ? 'is-invalid' : '' }}" type="text" name="date" id="date" value="{{ old('date', $scanDataCellular->date) }}" required>
-                @if($errors->has('date'))
+                <label class="required" for="scan_url">{{ trans('cruds.scanQueue.fields.scan_url') }}</label>
+                <input class="form-control {{ $errors->has('scan_url') ? 'is-invalid' : '' }}" type="text" name="scan_url" id="scan_url" value="{{ old('scan_url', $scanQueue->scan_url) }}" required>
+                @if($errors->has('scan_url'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('date') }}
+                        {{ $errors->first('scan_url') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.scanDataCellular.fields.date_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.scanQueue.fields.scan_url_helper') }}</span>
             </div>
             <div class="form-group">
-                <label class="required" for="html">{{ trans('cruds.scanDataCellular.fields.html') }}</label>
-                <textarea class="form-control {{ $errors->has('html') ? 'is-invalid' : '' }}" name="html" id="html" required>{{ old('html', $scanDataCellular->html) }}</textarea>
-                @if($errors->has('html'))
+                <label for="scan_parameters">{{ trans('cruds.scanQueue.fields.scan_parameters') }}</label>
+                <input class="form-control {{ $errors->has('scan_parameters') ? 'is-invalid' : '' }}" type="text" name="scan_parameters" id="scan_parameters" value="{{ old('scan_parameters', $scanQueue->scan_parameters) }}">
+                @if($errors->has('scan_parameters'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('html') }}
+                        {{ $errors->first('scan_parameters') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.scanDataCellular.fields.html_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.scanQueue.fields.scan_parameters_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="html_changed_datetime">{{ trans('cruds.scanDataCellular.fields.html_changed_datetime') }}</label>
-                <input class="form-control datetime {{ $errors->has('html_changed_datetime') ? 'is-invalid' : '' }}" type="text" name="html_changed_datetime" id="html_changed_datetime" value="{{ old('html_changed_datetime', $scanDataCellular->html_changed_datetime) }}">
-                @if($errors->has('html_changed_datetime'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('html_changed_datetime') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.scanDataCellular.fields.html_changed_datetime_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="provider_name">{{ trans('cruds.scanDataCellular.fields.provider_name') }}</label>
-                <input class="form-control {{ $errors->has('provider_name') ? 'is-invalid' : '' }}" type="text" name="provider_name" id="provider_name" value="{{ old('provider_name', $scanDataCellular->provider_name) }}">
-                @if($errors->has('provider_name'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('provider_name') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.scanDataCellular.fields.provider_name_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="package_name">{{ trans('cruds.scanDataCellular.fields.package_name') }}</label>
-                <input class="form-control {{ $errors->has('package_name') ? 'is-invalid' : '' }}" type="text" name="package_name" id="package_name" value="{{ old('package_name', $scanDataCellular->package_name) }}">
-                @if($errors->has('package_name'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('package_name') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.scanDataCellular.fields.package_name_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="package_change_price">{{ trans('cruds.scanDataCellular.fields.package_change_price') }}</label>
-                <input class="form-control {{ $errors->has('package_change_price') ? 'is-invalid' : '' }}" type="number" name="package_change_price" id="package_change_price" value="{{ old('package_change_price', $scanDataCellular->package_change_price) }}" step="0.01">
-                @if($errors->has('package_change_price'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('package_change_price') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.scanDataCellular.fields.package_change_price_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label class="required" for="parser">{{ trans('cruds.scanDataCellular.fields.parser') }}</label>
-                <input class="form-control {{ $errors->has('parser') ? 'is-invalid' : '' }}" type="text" name="parser" id="parser" value="{{ old('parser', $scanDataCellular->parser) }}" required>
-                @if($errors->has('parser'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('parser') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.scanDataCellular.fields.parser_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <label for="package_month_price">{{ trans('cruds.scanDataCellular.fields.package_month_price') }}</label>
-                <input class="form-control {{ $errors->has('package_month_price') ? 'is-invalid' : '' }}" type="number" name="package_month_price" id="package_month_price" value="{{ old('package_month_price', $scanDataCellular->package_month_price) }}" step="0.01">
-                @if($errors->has('package_month_price'))
-                    <div class="invalid-feedback">
-                        {{ $errors->first('package_month_price') }}
-                    </div>
-                @endif
-                <span class="help-block">{{ trans('cruds.scanDataCellular.fields.package_month_price_helper') }}</span>
-            </div>
-            <div class="form-group">
-                <div class="form-check {{ $errors->has('html_changed') ? 'is-invalid' : '' }}">
-                    <input type="hidden" name="html_changed" value="0">
-                    <input class="form-check-input" type="checkbox" name="html_changed" id="html_changed" value="1" {{ $scanDataCellular->html_changed || old('html_changed', 0) === 1 ? 'checked' : '' }}>
-                    <label class="form-check-label" for="html_changed">{{ trans('cruds.scanDataCellular.fields.html_changed') }}</label>
+                <div class="form-check {{ $errors->has('scan_finished') ? 'is-invalid' : '' }}">
+                    <input type="hidden" name="scan_finished" value="0">
+                    <input class="form-check-input" type="checkbox" name="scan_finished" id="scan_finished" value="1" {{ $scanQueue->scan_finished || old('scan_finished', 0) === 1 ? 'checked' : '' }}>
+                    <label class="form-check-label" for="scan_finished">{{ trans('cruds.scanQueue.fields.scan_finished') }}</label>
                 </div>
-                @if($errors->has('html_changed'))
+                @if($errors->has('scan_finished'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('html_changed') }}
+                        {{ $errors->first('scan_finished') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.scanDataCellular.fields.html_changed_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.scanQueue.fields.scan_finished_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="package_min_lines">{{ trans('cruds.scanDataCellular.fields.package_min_lines') }}</label>
-                <input class="form-control {{ $errors->has('package_min_lines') ? 'is-invalid' : '' }}" type="number" name="package_min_lines" id="package_min_lines" value="{{ old('package_min_lines', $scanDataCellular->package_min_lines) }}" step="1">
-                @if($errors->has('package_min_lines'))
+                <label for="scan_datetime">{{ trans('cruds.scanQueue.fields.scan_datetime') }}</label>
+                <input class="form-control datetime {{ $errors->has('scan_datetime') ? 'is-invalid' : '' }}" type="text" name="scan_datetime" id="scan_datetime" value="{{ old('scan_datetime', $scanQueue->scan_datetime) }}">
+                @if($errors->has('scan_datetime'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('package_min_lines') }}
+                        {{ $errors->first('scan_datetime') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.scanDataCellular.fields.package_min_lines_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.scanQueue.fields.scan_datetime_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="package_minutes">{{ trans('cruds.scanDataCellular.fields.package_minutes') }}</label>
-                <input class="form-control {{ $errors->has('package_minutes') ? 'is-invalid' : '' }}" type="number" name="package_minutes" id="package_minutes" value="{{ old('package_minutes', $scanDataCellular->package_minutes) }}" step="1">
-                @if($errors->has('package_minutes'))
+                <label for="request">{{ trans('cruds.scanQueue.fields.request') }}</label>
+                <input class="form-control {{ $errors->has('request') ? 'is-invalid' : '' }}" type="text" name="request" id="request" value="{{ old('request', $scanQueue->request) }}">
+                @if($errors->has('request'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('package_minutes') }}
+                        {{ $errors->first('request') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.scanDataCellular.fields.package_minutes_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.scanQueue.fields.request_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="package_sms">{{ trans('cruds.scanDataCellular.fields.package_sms') }}</label>
-                <input class="form-control {{ $errors->has('package_sms') ? 'is-invalid' : '' }}" type="number" name="package_sms" id="package_sms" value="{{ old('package_sms', $scanDataCellular->package_sms) }}" step="1">
-                @if($errors->has('package_sms'))
+                <label for="response_code">{{ trans('cruds.scanQueue.fields.response_code') }}</label>
+                <input class="form-control {{ $errors->has('response_code') ? 'is-invalid' : '' }}" type="number" name="response_code" id="response_code" value="{{ old('response_code', $scanQueue->response_code) }}" step="1">
+                @if($errors->has('response_code'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('package_sms') }}
+                        {{ $errors->first('response_code') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.scanDataCellular.fields.package_sms_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.scanQueue.fields.response_code_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="package_gb">{{ trans('cruds.scanDataCellular.fields.package_gb') }}</label>
-                <input class="form-control {{ $errors->has('package_gb') ? 'is-invalid' : '' }}" type="number" name="package_gb" id="package_gb" value="{{ old('package_gb', $scanDataCellular->package_gb) }}" step="1">
-                @if($errors->has('package_gb'))
+                <label for="response_html">{{ trans('cruds.scanQueue.fields.response_html') }}</label>
+                <textarea class="form-control {{ $errors->has('response_html') ? 'is-invalid' : '' }}" name="response_html" id="response_html">{{ old('response_html', $scanQueue->response_html) }}</textarea>
+                @if($errors->has('response_html'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('package_gb') }}
+                        {{ $errors->first('response_html') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.scanDataCellular.fields.package_gb_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.scanQueue.fields.response_html_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="package_sim_price">{{ trans('cruds.scanDataCellular.fields.package_sim_price') }}</label>
-                <input class="form-control {{ $errors->has('package_sim_price') ? 'is-invalid' : '' }}" type="number" name="package_sim_price" id="package_sim_price" value="{{ old('package_sim_price', $scanDataCellular->package_sim_price) }}" step="0.01">
-                @if($errors->has('package_sim_price'))
+                <label>{{ trans('cruds.scanQueue.fields.type') }}</label>
+                <select class="form-control {{ $errors->has('type') ? 'is-invalid' : '' }}" name="type" id="type">
+                    <option value disabled {{ old('type', null) === null ? 'selected' : '' }}>{{ trans('global.pleaseSelect') }}</option>
+                    @foreach(App\ScanQueue::TYPE_SELECT as $key => $label)
+                        <option value="{{ $key }}" {{ old('type', $scanQueue->type) === (string) $key ? 'selected' : '' }}>{{ $label }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('type'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('package_sim_price') }}
+                        {{ $errors->first('type') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.scanDataCellular.fields.package_sim_price_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.scanQueue.fields.type_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="package_sim_connection_price">{{ trans('cruds.scanDataCellular.fields.package_sim_connection_price') }}</label>
-                <input class="form-control {{ $errors->has('package_sim_connection_price') ? 'is-invalid' : '' }}" type="number" name="package_sim_connection_price" id="package_sim_connection_price" value="{{ old('package_sim_connection_price', $scanDataCellular->package_sim_connection_price) }}" step="0.01">
-                @if($errors->has('package_sim_connection_price'))
+                <label for="proxy_id">{{ trans('cruds.scanQueue.fields.proxy') }}</label>
+                <select class="form-control select2 {{ $errors->has('proxy') ? 'is-invalid' : '' }}" name="proxy_id" id="proxy_id">
+                    @foreach($proxies as $id => $proxy)
+                        <option value="{{ $id }}" {{ ($scanQueue->proxy ? $scanQueue->proxy->id : old('proxy_id')) == $id ? 'selected' : '' }}>{{ $proxy }}</option>
+                    @endforeach
+                </select>
+                @if($errors->has('proxy'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('package_sim_connection_price') }}
+                        {{ $errors->first('proxy') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.scanDataCellular.fields.package_sim_connection_price_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.scanQueue.fields.proxy_helper') }}</span>
             </div>
             <div class="form-group">
-                <label for="minutes_to_other_countries">{{ trans('cruds.scanDataCellular.fields.minutes_to_other_countries') }}</label>
-                <input class="form-control {{ $errors->has('minutes_to_other_countries') ? 'is-invalid' : '' }}" type="number" name="minutes_to_other_countries" id="minutes_to_other_countries" value="{{ old('minutes_to_other_countries', $scanDataCellular->minutes_to_other_countries) }}" step="1">
-                @if($errors->has('minutes_to_other_countries'))
+                <label for="tries">{{ trans('cruds.scanQueue.fields.tries') }}</label>
+                <input class="form-control {{ $errors->has('tries') ? 'is-invalid' : '' }}" type="number" name="tries" id="tries" value="{{ old('tries', $scanQueue->tries) }}" step="1">
+                @if($errors->has('tries'))
                     <div class="invalid-feedback">
-                        {{ $errors->first('minutes_to_other_countries') }}
+                        {{ $errors->first('tries') }}
                     </div>
                 @endif
-                <span class="help-block">{{ trans('cruds.scanDataCellular.fields.minutes_to_other_countries_helper') }}</span>
+                <span class="help-block">{{ trans('cruds.scanQueue.fields.tries_helper') }}</span>
             </div>
             <div class="form-group">
                 <button class="btn btn-danger" type="submit">
