@@ -28,14 +28,18 @@
         <filter-component :companies="{{$companies}}" type="phone" id="{{$id}}" filter="{{$data}}"></filter-component>
     </div>
     <div class="mt-3"></div>
-@foreach($cellulars as $cell)
+@forelse($cellulars as $cell)
     <diplay-vue-component :item="{{$cell}}"></diplay-vue-component>
-@endforeach
+@empty
+    <h4 class="text-center">No packages found matching our search</h4>
+@endforelse
     @if ($ownCellulars->count() > 0)
         <h4 class="mt-3">Cellulars for your company</h4>
-        @foreach($ownCellulars as $item)
+        @forelse($ownCellulars as $item)
             <diplay-vue-component :item="{{$item}}"></diplay-vue-component>
-        @endforeach
+        @empty
+            <h4>No packages found matching our search</h4>
+        @endforelse
     @endif
 
 </div>
