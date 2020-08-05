@@ -65,6 +65,9 @@
                             {{ trans('cruds.scanDataCellular.fields.package_sim_connection_price') }}
                         </th>
                         <th>
+                            {{ trans('cruds.scanDataCellular.fields.minutes_to_other_countries') }}
+                        </th>
+                        <th>
                             &nbsp;
                         </th>
                     </tr>
@@ -117,6 +120,9 @@
                             </td>
                             <td>
                                 {{ $scanDataCellular->package_sim_connection_price ?? '' }}
+                            </td>
+                            <td>
+                                {{ $scanDataCellular->minutes_to_other_countries ?? '' }}
                             </td>
                             <td>
                                 @can('scan_data_cellular_show')
