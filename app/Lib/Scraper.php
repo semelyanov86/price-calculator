@@ -108,8 +108,8 @@ class Scraper
                 if ($scanDataModel) {
                     $html = $item->get('html');
                     if ($html !== $scanDataModel->html) {
-                        file_put_contents(config('filesystems.disks.local.root') . '/dbdiffdump.txt', print_r($scanDataModel->html));
-                        file_put_contents(config('filesystems.disks.local.root') . '/webdiffdump.txt', print_r($html));
+//                        file_put_contents(config('filesystems.disks.local.root') . '/dbdiffdump.txt', print_r($scanDataModel->html));
+//                        file_put_contents(config('filesystems.disks.local.root') . '/webdiffdump.txt', print_r($html));
                         $dataArray = $item->toArray();
                         $dataArray['html'] = $html;
                         $dataArray['html_changed'] = 1;
@@ -142,6 +142,7 @@ class Scraper
         $result = collect([]);
         $datas = $crawler->filter('.package')->each(function (Crawler $package, $i) use ($result) {
             $simPrice = $this->getFloat($this->getPackageSimPrice($package));
+            $this->removeElementsFromPackage($package);
             $idCollect = $package->filter('.share-btn');
             if ($idCollect->count() > 0) {
                 $id = $idCollect->first()->attr('data-target');
@@ -198,6 +199,15 @@ class Scraper
 
         });
         return $result;
+    }
+
+    private function removeElementsFromPackage(&$package)
+    {
+        $package->filter('input[name="ip_user"]')->each(function (Crawler $crawler) {
+            foreach ($crawler as $node) {
+                $node->parentNode->removeChild($node);
+            }
+        });
     }
 
     private function getIntValue(Crawler $collection, $fromParent = true) : ?int
