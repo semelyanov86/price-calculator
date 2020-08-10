@@ -35,6 +35,6 @@ class ScanDataChangedNotification implements ShouldQueue
     public function handle()
     {
         $admin_user = User::whereId(1)->first();
-        $admin_user->notify(new ScanDataChanged($this->scanDataModel));
+//        $admin_user->notify(new ScanDataChanged($this->scanDataModel));
     }
 }
