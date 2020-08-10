@@ -158,30 +158,20 @@ class Scraper
             } else {
                 $packagePrice = null;
             }
-            $gbCollect = $package->filter('.item-cluster')->first()->filter('.logo1');
-            if ($gbCollect->count() > 0) {
-                $gb = $this->convertToInt($gbCollect->text());
-            } else {
-                $gb = null;
-            }
-            $minutesCollection = $package->filter('.item-cluster')->first()->filter('.logo2');
-            if ($minutesCollection->count() > 0) {
-                $minutes = $this->convertToInt($minutesCollection->text());
-            } else {
-                $minutes = null;
-            }
-            $smsCollection = $package->filter('.item-cluster')->first()->filter('.logo3');
-            if ($smsCollection->count() > 0) {
-                $sms = $this->convertToInt($smsCollection->text());
-            } else {
-                $sms = null;
-            }
-            $simCollection = $package->filter('.item-cluster')->first()->filter('.logo4');
-            if ($simCollection->count() > 0) {
-                $sim = $this->convertToInt($simCollection->text());
-            } else {
-                $sim = null;
-            }
+            $gbCollect = $package->filter('.item-cluster')->first()->filter('.fa-wifi');
+            $gb = $this->getIntValue($gbCollect);
+
+            $minutesCollection = $package->filter('.item-cluster')->first()->filter('.fa-phone');
+            $minutes = $this->getIntValue($minutesCollection);
+
+            $smsCollection = $package->filter('.item-cluster')->first()->filter('.md-chat');
+            $sms = $this->getIntValue($smsCollection);
+
+            $simCollection = $package->filter('.item-cluster')->first()->filter('.md-sim-card');
+            $sim = $this->getIntValue($simCollection);
+
+            $otherCountriesCollection = $package->filter('.item-cluster')->first()->filter('.fa-plane');
+            $otherCountries = $this->getIntValue($otherCountriesCollection);
 
             $result->push(collect([
                 'parser' => $this->parseId(trim($id)),
@@ -194,11 +184,24 @@ class Scraper
                 'package_sim_price' => $sim,
                 'package_month_price' => $packagePrice,
                 'date' => Carbon::now()->format('Y-m-d'),
-                'package_sim_connection_price' => $simPrice
+                'package_sim_connection_price' => $simPrice,
+                'minutes_to_other_countries' => $otherCountries
             ]));
 
         });
         return $result;
+    }
+
+    private function getIntValue(Crawler $collection, $fromParent = true) : ?int
+    {
+        if ($fromParent && $collection->count() > 0) {
+            $collection = $collection->parents();
+        }
+        if ($collection->count() > 0) {
+            return $this->convertToInt($collection->text());
+        } else {
+            return null;
+        }
     }
 
     protected function getPackageSimPrice(Crawler $package) : string
