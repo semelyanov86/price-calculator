@@ -37,3 +37,7 @@ Command for running parser and saving to DB operation:
 To get filter form, go to route:
 
 `/phones`
+
+Command for deleting old and unused parser data:
+
+`php artisan parser:delete`

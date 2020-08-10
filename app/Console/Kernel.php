@@ -26,6 +26,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('parser:schedule')->daily();
         $schedule->command('parser:init')->everyTenMinutes();
+        $schedule->command('parser:delete')->daily();
     }
 
     /**
