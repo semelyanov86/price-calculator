@@ -108,6 +108,8 @@ class Scraper
                 if ($scanDataModel) {
                     $html = $item->get('html');
                     if ($html !== $scanDataModel->html) {
+                        file_put_contents(config('filesystems.disks.local.root') . '/dbdiffdump.txt', print_r($scanDataModel->html));
+                        file_put_contents(config('filesystems.disks.local.root') . '/webdiffdump.txt', print_r($html));
                         $dataArray = $item->toArray();
                         $dataArray['html'] = $html;
                         $dataArray['html_changed'] = 1;
@@ -117,9 +119,7 @@ class Scraper
                         $dataArray = $item->toArray();
                         $dataArray['html_changed'] = 0;
                     }
-                    if ($scanDataModel->package_min_lines) {
-                        unset($dataArray['package_min_lines']);
-                    }
+                    $dataArray = $this->filterUpdateData($dataArray, $scanDataModel);
                     $scanDataModel->update($dataArray);
                     return $scanDataModel;
                 } else {
@@ -127,6 +127,14 @@ class Scraper
                 }
             }
         }
+    }
+
+    private function filterUpdateData(array $dataArray, ScanDataCellular $scanDataModel) : array
+    {
+        if ($scanDataModel->package_min_lines) {
+            unset($dataArray['package_min_lines']);
+        }
+        return $dataArray;
     }
 
     protected function getFullModel(Crawler $crawler) : Collection
