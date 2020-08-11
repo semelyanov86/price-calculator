@@ -194,7 +194,8 @@ class Scraper
                 'package_month_price' => $packagePrice,
                 'date' => Carbon::now()->format('Y-m-d'),
                 'package_sim_connection_price' => $simPrice,
-                'minutes_to_other_countries' => $otherCountries
+                'minutes_to_other_countries' => $otherCountries,
+                'package_min_lines' => 1
             ]));
 
         });
