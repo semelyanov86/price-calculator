@@ -38,6 +38,7 @@ class ScanDataCellular extends Model
         'package_sim_price',
         'package_sim_connection_price',
         'minutes_to_other_countries',
+        'logo',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -89,5 +90,10 @@ class ScanDataCellular extends Model
     public function setHtmlChangedDatetimeAttribute($value)
     {
         $this->attributes['html_changed_datetime'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
+    }
+
+    public function scanDataCellularUserDatas()
+    {
+        return $this->belongsToMany(UserData::class);
     }
 }

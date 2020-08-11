@@ -96,6 +96,12 @@ class StoreScanDataCellularRequest extends FormRequest
                     'max:2147483647',
                 ],
             ],
+            'logo'                       => [
+                'string',
+                'min:5',
+                'max:190',
+                'nullable',
+            ],
         ];
     }
 }

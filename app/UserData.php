@@ -12,15 +12,15 @@ class UserData extends Model
 
     public $table = 'user_datas';
 
+    const TYPE_SELECT = [
+        'none'     => 'None',
+        'cellular' => 'Cellular',
+    ];
+
     protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at',
-    ];
-
-    const TYPE_SELECT = [
-        'none'     => 'None',
-        'cellular' => 'Cellular',
     ];
 
     protected $fillable = [
@@ -34,5 +34,10 @@ class UserData extends Model
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+
+    public function scan_data_cellulars()
+    {
+        return $this->belongsToMany(ScanDataCellular::class);
     }
 }

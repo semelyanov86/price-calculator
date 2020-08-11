@@ -174,6 +174,16 @@
                     <span class="help-block">{{ trans('cruds.scanDataCellular.fields.minutes_to_other_countries_helper') }}</span>
                 </div>
                 <div class="form-group">
+                    <label for="logo">{{ trans('cruds.scanDataCellular.fields.logo') }}</label>
+                    <input class="form-control {{ $errors->has('logo') ? 'is-invalid' : '' }}" type="text" name="logo" id="logo" value="{{ old('logo', $scanDataCellular->logo) }}">
+                    @if($errors->has('logo'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('logo') }}
+                        </div>
+                    @endif
+                    <span class="help-block">{{ trans('cruds.scanDataCellular.fields.logo_helper') }}</span>
+                </div>
+                <div class="form-group">
                     <button class="btn btn-danger" type="submit">
                         {{ trans('global.save') }}
                     </button>

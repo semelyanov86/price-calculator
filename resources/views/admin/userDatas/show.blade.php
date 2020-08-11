@@ -39,6 +39,16 @@
                             {{ $userData->data }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.userData.fields.scan_data_cellular') }}
+                        </th>
+                        <td>
+                            @foreach($userData->scan_data_cellulars as $key => $scan_data_cellular)
+                                <span class="label label-info">{{ $scan_data_cellular->package_name }}</span>
+                            @endforeach
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
