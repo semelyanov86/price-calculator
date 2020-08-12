@@ -48,65 +48,45 @@
                 <table class="table table-hover">
                     <thead>
                     <tr>
-                        <th scope="col">Parameter</th>
-                        <th scope="col">Value</th>
+                        <th scope="col">{{ __("site.parameter") }}</th>
+                        <th scope="col">{{ __("site.value") }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <th scope="row">ID</th>
-                        <td>{{item.id}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Scan Date</th>
-                        <td>{{item.date}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">When changed</th>
-                        <td>{{item.html_changed_datetime}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Provider Name</th>
-                        <td>{{item.provider_name}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Package Name</th>
-                        <td>{{item.package_name}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Package Change Price</th>
+                        <th scope="row">{{ __("site.package-change-price") }}</th>
                         <td>{{item.package_change_price}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Package Month Price</th>
+                        <th scope="row">{{ __("site.package-month-price") }}</th>
                         <td>{{item.package_month_price}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Package Min Lines</th>
+                        <th scope="row">{{ __("site.package-min-lines") }}</th>
                         <td>{{item.package_min_lines}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Package Minutes</th>
+                        <th scope="row">{{ __("site.package-minutes") }}</th>
                         <td>{{item.package_minites}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Package SMS</th>
+                        <th scope="row">{{ __("site.package-sms") }}</th>
                         <td>{{item.package_sms}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Package GB</th>
+                        <th scope="row">{{ __("site.package-gb") }}</th>
                         <td>{{item.package_gb}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Package Sim Price</th>
+                        <th scope="row">{{ __("site.package-sim-price") }}</th>
                         <td>{{item.package_sim_price}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Package Sim Connection Price</th>
+                        <th scope="row">{{ __("site.package-sim-connection-price") }}</th>
                         <td>{{item.package_sim_connection_price}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Minutes to other countries</th>
+                        <th scope="row">{{ __("site.minutes-to-other-countries") }}</th>
                         <td>{{item.minutes_to_other_countries}}</td>
                     </tr>
                     </tbody>
@@ -118,6 +98,7 @@
 </template>
 
 <script>
+require('../trans');
     export default {
         name: "DisplayVueComponent",
         props: {

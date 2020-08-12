@@ -2007,26 +2007,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+__webpack_require__(/*! ../trans */ "./resources/js/trans.js");
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DisplayVueComponent",
   props: {
@@ -38396,48 +38378,22 @@ var render = function() {
           },
           [
             _c("table", { staticClass: "table table-hover" }, [
-              _vm._m(4),
+              _c("thead", [
+                _c("tr", [
+                  _c("th", { attrs: { scope: "col" } }, [
+                    _vm._v(_vm._s(_vm.__("site.parameter")))
+                  ]),
+                  _vm._v(" "),
+                  _c("th", { attrs: { scope: "col" } }, [
+                    _vm._v(_vm._s(_vm.__("site.value")))
+                  ])
+                ])
+              ]),
               _vm._v(" "),
               _c("tbody", [
                 _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [_vm._v("ID")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm.item.id))])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [_vm._v("Scan Date")]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm.item.date))])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
                   _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v("When changed")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm.item.html_changed_datetime))])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v("Provider Name")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm.item.provider_name))])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v("Package Name")
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm.item.package_name))])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v("Package Change Price")
+                    _vm._v(_vm._s(_vm.__("site.package-change-price")))
                   ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(_vm.item.package_change_price))])
@@ -38445,7 +38401,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("tr", [
                   _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v("Package Month Price")
+                    _vm._v(_vm._s(_vm.__("site.package-month-price")))
                   ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(_vm.item.package_month_price))])
@@ -38453,7 +38409,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("tr", [
                   _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v("Package Min Lines")
+                    _vm._v(_vm._s(_vm.__("site.package-min-lines")))
                   ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(_vm.item.package_min_lines))])
@@ -38461,7 +38417,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("tr", [
                   _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v("Package Minutes")
+                    _vm._v(_vm._s(_vm.__("site.package-minutes")))
                   ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(_vm.item.package_minites))])
@@ -38469,21 +38425,23 @@ var render = function() {
                 _vm._v(" "),
                 _c("tr", [
                   _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v("Package SMS")
+                    _vm._v(_vm._s(_vm.__("site.package-sms")))
                   ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(_vm.item.package_sms))])
                 ]),
                 _vm._v(" "),
                 _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [_vm._v("Package GB")]),
+                  _c("th", { attrs: { scope: "row" } }, [
+                    _vm._v(_vm._s(_vm.__("site.package-gb")))
+                  ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(_vm.item.package_gb))])
                 ]),
                 _vm._v(" "),
                 _c("tr", [
                   _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v("Package Sim Price")
+                    _vm._v(_vm._s(_vm.__("site.package-sim-price")))
                   ]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(_vm.item.package_sim_price))])
@@ -38491,7 +38449,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("tr", [
                   _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v("Package Sim Connection Price")
+                    _vm._v(_vm._s(_vm.__("site.package-sim-connection-price")))
                   ]),
                   _vm._v(" "),
                   _c("td", [
@@ -38501,7 +38459,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("tr", [
                   _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v("Minutes to other countries")
+                    _vm._v(_vm._s(_vm.__("site.minutes-to-other-countries")))
                   ]),
                   _vm._v(" "),
                   _c("td", [
@@ -38556,18 +38514,6 @@ var staticRenderFns = [
       { staticStyle: { "font-size": "3em", color: "Dodgerblue" } },
       [_c("i", { staticClass: "fas fa-wifi" })]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Parameter")]),
-        _vm._v(" "),
-        _c("th", { attrs: { scope: "col" } }, [_vm._v("Value")])
-      ])
-    ])
   }
 ]
 render._withStripped = true
@@ -52422,6 +52368,7 @@ Vue.use(vue_notification__WEBPACK_IMPORTED_MODULE_0___default.a);
 Vue.component('example-component', __webpack_require__(/*! ./components/ExampleComponent.vue */ "./resources/js/components/ExampleComponent.vue")["default"]);
 Vue.component('filter-component', __webpack_require__(/*! ./components/FilterComponent.vue */ "./resources/js/components/FilterComponent.vue")["default"]);
 Vue.component('diplay-vue-component', __webpack_require__(/*! ./components/DisplayVueComponent */ "./resources/js/components/DisplayVueComponent.vue")["default"]);
+Vue.mixin(__webpack_require__(/*! ./trans */ "./resources/js/trans.js"));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -52683,6 +52630,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_FilterComponent_vue_vue_type_template_id_1c992a4a_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/trans.js":
+/*!*******************************!*\
+  !*** ./resources/js/trans.js ***!
+  \*******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = {
+  methods: {
+    /**
+     * Translate the given key.
+     */
+    __: function __(key, replace) {
+      var translation,
+          translationNotFound = true;
+
+      try {
+        translation = key.split('.').reduce(function (t, i) {
+          return t[i] || null;
+        }, window._translations[window._locale].php);
+
+        if (translation) {
+          translationNotFound = false;
+        }
+      } catch (e) {
+        translation = key;
+      }
+
+      if (translationNotFound) {
+        translation = window._translations[window._locale]['json'][key] ? window._translations[window._locale]['json'][key] : key;
+      }
+
+      _.forEach(replace, function (value, key) {
+        translation = translation.replace(':' + key, value);
+      });
+
+      return translation;
+    }
+  }
+};
 
 /***/ }),
 

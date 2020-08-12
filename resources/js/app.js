@@ -23,6 +23,7 @@ Vue.use(Notifications)
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('filter-component', require('./components/FilterComponent.vue').default);
 Vue.component('diplay-vue-component', require('./components/DisplayVueComponent').default);
+Vue.mixin(require('./trans'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
