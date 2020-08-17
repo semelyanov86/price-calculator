@@ -93,8 +93,8 @@ class ScanDataCellular extends Model
         $this->attributes['html_changed_datetime'] = $value ? Carbon::createFromFormat(config('panel.date_format') . ' ' . config('panel.time_format'), $value)->format('Y-m-d H:i:s') : null;
     }
 
-    public function scanDataCellularUserDatas()
+    public function scanDataCellularsUserDatas()
     {
-        return $this->belongsToMany(UserData::class);
+        return $this->hasMany(UserData::class, 'scan_data_cellulars_id', 'id');
     }
 }
