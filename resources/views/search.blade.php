@@ -60,14 +60,14 @@
     </div>
     <div class="mt-3"></div>
 @forelse($cellulars as $cell)
-    <diplay-vue-component :item="{{$cell}}"></diplay-vue-component>
+    <diplay-vue-component ordered="{{$choosed}}" id="{{$id}}" :item="{{$cell}}"></diplay-vue-component>
 @empty
     <h4 class="text-center">{{trans('site.no_data')}}</h4>
 @endforelse
     @if ($ownCellulars->count() > 0)
         <h4 class="mt-3">{{trans('site.cellulars_company')}}</h4>
         @forelse($ownCellulars as $item)
-            <diplay-vue-component :item="{{$item}}"></diplay-vue-component>
+            <diplay-vue-component ordered="{{$choosed}}" id="{{$id}}" :item="{{$item}}"></diplay-vue-component>
         @empty
             <h4>{{trans('site.no_data')}}</h4>
         @endforelse

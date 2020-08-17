@@ -1908,6 +1908,46 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-loading-overlay */ "./node_modules/vue-loading-overlay/dist/vue-loading.min.js");
+/* harmony import */ var vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-loading-overlay/dist/vue-loading.css */ "./node_modules/vue-loading-overlay/dist/vue-loading.css");
+/* harmony import */ var vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_loading_overlay_dist_vue_loading_css__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2009,17 +2049,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 __webpack_require__(/*! ../trans */ "./resources/js/trans.js");
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DisplayVueComponent",
+  components: {
+    Loading: vue_loading_overlay__WEBPACK_IMPORTED_MODULE_0___default.a
+  },
   props: {
     item: {
       type: Object,
       required: true
+    },
+    id: {
+      type: String,
+      required: true
+    },
+    ordered: {
+      type: String,
+      required: false
     }
   },
   data: function data() {
     return {
-      isActive: false
+      isActive: false,
+      isMore: false,
+      isLoading: false,
+      fullPage: true,
+      order: null,
+      choosedPackage: null
     };
   },
   computed: {
@@ -2029,7 +2087,41 @@ __webpack_require__(/*! ../trans */ "./resources/js/trans.js");
       } else {
         return ['fas', 'fa-arrow-down'];
       }
+    },
+    getUrl: function getUrl() {
+      var id = parseInt(this.id);
+      return '/api/user-data/order/' + id;
+    },
+    getPayload: function getPayload() {
+      return {
+        'scan': this.item.id
+      };
     }
+  },
+  methods: {
+    makeOrder: function makeOrder() {
+      var self = this;
+      this.isLoading = true;
+      axios.post(this.getUrl, this.getPayload).then(function (response) {
+        self.choosedPackage = response.data.scan;
+        self.isLoading = false;
+        self.$notify({
+          group: 'dalert',
+          title: 'Data ordered',
+          text: "You successfully ordered package"
+        });
+      })["catch"](function (error) {
+        self.$notify({
+          group: 'dalert',
+          title: 'Error during order package',
+          text: error.message
+        });
+        self.isLoading = false;
+      });
+    }
+  },
+  created: function created() {
+    this.choosedPackage = this.ordered;
   }
 });
 
@@ -38280,41 +38372,43 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card mt-2" }, [
-    _c(
-      "div",
-      {
-        staticClass: "card-body",
+  return _c(
+    "div",
+    { staticClass: "card mt-2" },
+    [
+      _c("notifications", { attrs: { group: "dalert" } }),
+      _vm._v(" "),
+      _c("loading", {
+        attrs: {
+          active: _vm.isLoading,
+          "can-cancel": true,
+          "is-full-page": _vm.fullPage
+        },
         on: {
-          click: function($event) {
-            _vm.isActive = !_vm.isActive
+          "update:active": function($event) {
+            _vm.isLoading = $event
           }
         }
-      },
-      [
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-sm-10" }, [
             _c("h5", { staticClass: "card-title" }, [
               _vm._v(_vm._s(_vm.item.package_name))
             ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "col-sm-2 text-right",
-              staticStyle: {
-                "font-size": "1em",
-                color: "Dodgerblue",
-                cursor: "pointer"
-              }
-            },
-            [_c("i", { class: _vm.getClassName })]
-          )
+          ])
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-3 text-center" }, [
+          _c("div", { staticClass: "col-sm-2 text-center" }, [
+            _c("img", {
+              staticStyle: { "max-height": "80px" },
+              attrs: { src: _vm.item.logo, alt: _vm.item.provider_name }
+            })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-2 text-center" }, [
             _vm._m(0),
             _vm._v(" "),
             _c("div", [
@@ -38326,7 +38420,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-3  text-center" }, [
+          _c("div", { staticClass: "col-sm-2  text-center" }, [
             _vm._m(1),
             _vm._v(" "),
             _c("div", [
@@ -38338,7 +38432,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-3  text-center" }, [
+          _c("div", { staticClass: "col-sm-2  text-center" }, [
             _vm._m(2),
             _vm._v(" "),
             _c("div", [
@@ -38350,7 +38444,7 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-sm-3  text-center" }, [
+          _c("div", { staticClass: "col-sm-2  text-center" }, [
             _vm._m(3),
             _vm._v(" "),
             _c("div", [
@@ -38360,7 +38454,33 @@ var render = function() {
                   "\n                "
               )
             ])
-          ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "col-sm-2 d-flex align-items-center flex-column",
+              on: {
+                click: function($event) {
+                  _vm.isActive = !_vm.isActive
+                }
+              }
+            },
+            [
+              _c(
+                "span",
+                {
+                  staticClass: "mt-auto p-2",
+                  staticStyle: {
+                    "font-size": "2em",
+                    color: "Dodgerblue",
+                    cursor: "pointer"
+                  }
+                },
+                [_c("i", { class: _vm.getClassName })]
+              )
+            ]
+          )
         ]),
         _vm._v(" "),
         _c(
@@ -38377,102 +38497,204 @@ var render = function() {
             staticClass: "mt-2"
           },
           [
-            _c("table", { staticClass: "table table-hover" }, [
-              _c("thead", [
-                _c("tr", [
-                  _c("th", { attrs: { scope: "col" } }, [
-                    _vm._v(_vm._s(_vm.__("site.parameter")))
-                  ]),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-4 d-flex align-items-center" }, [
+                _c("div", [
+                  _vm._m(4),
                   _vm._v(" "),
-                  _c("th", { attrs: { scope: "col" } }, [
-                    _vm._v(_vm._s(_vm.__("site.value")))
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("h5", { staticClass: "card-title" }, [
+                        _vm._v(_vm._s(_vm.__("site.package-interested-header")))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v(_vm._s(_vm.__("site.package-interested-text")))
+                      ]),
+                      _vm._v(" "),
+                      _vm.item.id == _vm.choosedPackage
+                        ? _c(
+                            "div",
+                            {
+                              staticClass: "badge badge-primary text-wrap",
+                              staticStyle: { width: "6rem" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                    " +
+                                  _vm._s(_vm.__("site.already-ordered")) +
+                                  "\n                                "
+                              )
+                            ]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.item.id != _vm.choosedPackage
+                        ? _c(
+                            "a",
+                            {
+                              staticClass: "btn btn-primary",
+                              attrs: { href: "#" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.makeOrder($event)
+                                }
+                              }
+                            },
+                            [_vm._v(_vm._s(_vm.__("site.make-order")))]
+                          )
+                        : _vm._e()
+                    ])
                   ])
                 ])
               ]),
               _vm._v(" "),
-              _c("tbody", [
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v(_vm._s(_vm.__("site.package-change-price")))
+              _c("div", { staticClass: "col-8" }, [
+                _c("table", { staticClass: "table table-hover" }, [
+                  _c("thead", [
+                    _c("tr", [
+                      _c("th", { attrs: { scope: "col" } }, [
+                        _vm._v(_vm._s(_vm.__("site.parameter")))
+                      ]),
+                      _vm._v(" "),
+                      _c("th", { attrs: { scope: "col" } }, [
+                        _vm._v(_vm._s(_vm.__("site.value")))
+                      ])
+                    ])
                   ]),
                   _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm.item.package_change_price))])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v(_vm._s(_vm.__("site.package-month-price")))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm.item.package_month_price))])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v(_vm._s(_vm.__("site.package-min-lines")))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm.item.package_min_lines))])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v(_vm._s(_vm.__("site.package-minutes")))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm.item.package_minites))])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v(_vm._s(_vm.__("site.package-sms")))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm.item.package_sms))])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v(_vm._s(_vm.__("site.package-gb")))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm.item.package_gb))])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v(_vm._s(_vm.__("site.package-sim-price")))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [_vm._v(_vm._s(_vm.item.package_sim_price))])
-                ]),
-                _vm._v(" "),
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v(_vm._s(_vm.__("site.package-sim-connection-price")))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _vm._v(_vm._s(_vm.item.package_sim_connection_price))
+                  _c("tbody", [
+                    _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [
+                        _vm._v(_vm._s(_vm.__("site.package-change-price")))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.item.package_change_price))])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [
+                        _vm._v(_vm._s(_vm.__("site.package-month-price")))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.item.package_month_price))])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [
+                        _vm._v(_vm._s(_vm.__("site.package-min-lines")))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.item.package_min_lines))])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [
+                        _vm._v(_vm._s(_vm.__("site.package-minutes")))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.item.package_minites))])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [
+                        _vm._v(_vm._s(_vm.__("site.package-sms")))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.item.package_sms))])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [
+                        _vm._v(_vm._s(_vm.__("site.package-gb")))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.item.package_gb))])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [
+                        _vm._v(_vm._s(_vm.__("site.package-sim-price")))
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(_vm.item.package_sim_price))])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [
+                        _vm._v(
+                          _vm._s(_vm.__("site.package-sim-connection-price"))
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(_vm._s(_vm.item.package_sim_connection_price))
+                      ])
+                    ]),
+                    _vm._v(" "),
+                    _c("tr", [
+                      _c("th", { attrs: { scope: "row" } }, [
+                        _vm._v(
+                          _vm._s(_vm.__("site.minutes-to-other-countries"))
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("td", [
+                        _vm._v(_vm._s(_vm.item.minutes_to_other_countries))
+                      ])
+                    ])
                   ])
                 ]),
                 _vm._v(" "),
-                _c("tr", [
-                  _c("th", { attrs: { scope: "row" } }, [
-                    _vm._v(_vm._s(_vm.__("site.minutes-to-other-countries")))
-                  ]),
-                  _vm._v(" "),
-                  _c("td", [
-                    _vm._v(_vm._s(_vm.item.minutes_to_other_countries))
-                  ])
-                ])
+                !_vm.isMore
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "text-decoration-none",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.isMore = true
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(_vm.__("site.show-more")))]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.isMore
+                  ? _c("div", {
+                      staticClass: "container",
+                      domProps: { innerHTML: _vm._s(_vm.item.other_details) }
+                    })
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.isMore
+                  ? _c(
+                      "a",
+                      {
+                        staticClass: "text-decoration-none",
+                        attrs: { href: "#" },
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            _vm.isMore = false
+                          }
+                        }
+                      },
+                      [_vm._v(_vm._s(_vm.__("site.hide-more")))]
+                    )
+                  : _vm._e()
               ])
             ])
           ]
         )
-      ]
-    )
-  ])
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -38514,6 +38736,21 @@ var staticRenderFns = [
       { staticStyle: { "font-size": "3em", color: "Dodgerblue" } },
       [_c("i", { staticClass: "fas fa-wifi" })]
     )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "text-center" }, [
+      _c(
+        "span",
+        {
+          staticClass: "card-img-top",
+          staticStyle: { "font-size": "3em", color: "Dodgerblue" }
+        },
+        [_c("i", { staticClass: "fas fa-shopping-cart" })]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -38616,7 +38853,7 @@ var render = function() {
         [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "company_id" } }, [
-              _vm._v("Choose company")
+              _vm._v(_vm._s(_vm.__("site.choose-company")))
             ]),
             _vm._v(" "),
             _c(
@@ -38674,7 +38911,7 @@ var render = function() {
           _vm._v(" "),
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "lines" } }, [
-              _vm._v("Choose number of lines")
+              _vm._v(_vm._s(_vm.__("site.no-of-lines")))
             ]),
             _vm._v(" "),
             _c(
@@ -38717,7 +38954,7 @@ var render = function() {
             return _c("div", { staticClass: "form-row" }, [
               _c("div", { staticClass: "form-group col-md-2" }, [
                 _c("label", { attrs: { for: "phone" + cur } }, [
-                  _vm._v("Phone number")
+                  _vm._v(_vm._s(_vm.__("site.phone-number")))
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -38755,7 +38992,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-2" }, [
                 _c("label", { attrs: { for: "minutes" + cur } }, [
-                  _vm._v("Number of minutes")
+                  _vm._v(_vm._s(_vm.__("site.number-of-minutes")))
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -38796,7 +39033,9 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-2" }, [
-                _c("label", { attrs: { for: "sms" + cur } }, [_vm._v("SMS")]),
+                _c("label", { attrs: { for: "sms" + cur } }, [
+                  _vm._v(_vm._s(_vm.__("site.sms")))
+                ]),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -38832,7 +39071,9 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-2" }, [
-                _c("label", { attrs: { for: "gb" + cur } }, [_vm._v("GB")]),
+                _c("label", { attrs: { for: "gb" + cur } }, [
+                  _vm._v(_vm._s(_vm.__("site.gb")))
+                ]),
                 _vm._v(" "),
                 _c("input", {
                   directives: [
@@ -38869,7 +39110,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-2" }, [
                 _c("label", { attrs: { for: "roaming" + cur } }, [
-                  _vm._v("Calls to other countries")
+                  _vm._v(_vm._s(_vm.__("site.calls-to-countries")))
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -38911,7 +39152,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "form-group col-md-2" }, [
                 _c("label", { attrs: { for: "price" + cur } }, [
-                  _vm._v("Your current price")
+                  _vm._v(_vm._s(_vm.__("site.your-current-price")))
                 ]),
                 _vm._v(" "),
                 _c("input", {
@@ -38952,7 +39193,7 @@ var render = function() {
           _c(
             "button",
             { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-            [_vm._v("Search")]
+            [_vm._v(_vm._s(_vm.__("site.Search")))]
           )
         ],
         2

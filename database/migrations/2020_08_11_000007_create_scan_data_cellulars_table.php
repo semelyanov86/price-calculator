@@ -27,6 +27,7 @@ class CreateScanDataCellularsTable extends Migration
             $table->decimal('package_sim_connection_price', 15, 2)->nullable();
             $table->integer('minutes_to_other_countries')->nullable();
             $table->string('logo')->nullable();
+            $table->longText('other_details')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

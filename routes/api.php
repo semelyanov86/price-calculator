@@ -25,3 +25,4 @@ Route::group(['prefix' => 'v1', 'as' => 'api.', 'namespace' => 'Api\V1\Admin', '
 
 Route::post('/data', 'Api\\UserDataController@store')->name('data.store');
 Route::post('/data/{data}', 'Api\\UserDataController@update')->name('data.store');
+Route::post('/user-data/order/{userData}', 'Api\\UserDataController@order')->name('data.order');

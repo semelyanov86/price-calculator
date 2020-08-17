@@ -15,6 +15,7 @@ class UserData extends Model
     const TYPE_SELECT = [
         'none'     => 'None',
         'cellular' => 'Cellular',
+        'phone' => 'Phone'
     ];
 
     protected $dates = [
@@ -26,6 +27,7 @@ class UserData extends Model
     protected $fillable = [
         'type',
         'data',
+        'scan_data_cellulars_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -38,6 +40,6 @@ class UserData extends Model
 
     public function scan_data_cellulars()
     {
-        return $this->belongsToMany(ScanDataCellular::class);
+        return $this->belongsTo(ScanDataCellular::class, 'scan_data_cellulars_id');
     }
 }

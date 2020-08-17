@@ -15,7 +15,7 @@
 
     <div class="card-body">
         <div class="table-responsive">
-            <table class=" table table-bordered table-striped table-hover datatable datatable-scanDataCellularUserDatas">
+            <table class=" table table-bordered table-striped table-hover datatable datatable-scanDataCellularsUserDatas">
                 <thead>
                     <tr>
                         <th width="10">
@@ -31,7 +31,7 @@
                             {{ trans('cruds.userData.fields.data') }}
                         </th>
                         <th>
-                            {{ trans('cruds.userData.fields.scan_data_cellular') }}
+                            {{ trans('cruds.userData.fields.scan_data_cellulars') }}
                         </th>
                         <th>
                             &nbsp;
@@ -54,9 +54,7 @@
                                 {{ $userData->data ?? '' }}
                             </td>
                             <td>
-                                @foreach($userData->scan_data_cellulars as $key => $item)
-                                    <span class="badge badge-info">{{ $item->package_name }}</span>
-                                @endforeach
+                                {{ $userData->scan_data_cellulars->package_name ?? '' }}
                             </td>
                             <td>
                                 @can('user_data_show')
@@ -129,7 +127,7 @@
     order: [[ 1, 'desc' ]],
     pageLength: 100,
   });
-  let table = $('.datatable-scanDataCellularUserDatas:not(.ajaxTable)').DataTable({ buttons: dtButtons })
+  let table = $('.datatable-scanDataCellularsUserDatas:not(.ajaxTable)').DataTable({ buttons: dtButtons })
   $('a[data-toggle="tab"]').on('shown.bs.tab click', function(e){
       $($.fn.dataTable.tables(true)).DataTable()
           .columns.adjust();

@@ -39,6 +39,7 @@ class ScanDataCellular extends Model
         'package_sim_connection_price',
         'minutes_to_other_countries',
         'logo',
+        'other_details',
         'created_at',
         'updated_at',
         'deleted_at',

@@ -149,6 +149,7 @@ class Scraper
             } else {
                 $id = null;
             }
+            $parserId = $this->parseId(trim($id));
             $titleCollect = $package->filter('.package_title');
             if ($titleCollect->count() > 0) {
                 $title = $titleCollect->first()->text();
@@ -182,8 +183,13 @@ class Scraper
             $otherCountriesCollection = $package->filter('.item-cluster')->first()->filter('.fa-plane');
             $otherCountries = $this->getIntValue($otherCountriesCollection);
 
+            $logoCollection = $package->filter('.company_img_xs')->first()->filter('img')->first();
+            $logo = parse_url($this->url, PHP_URL_SCHEME) . '://' . parse_url($this->url, PHP_URL_HOST) . $logoCollection->attr('src');
+
+            $otherDetails = $package->filter('#moreinfo' . $parserId)->first()->html();
+
             $result->push(collect([
-                'parser' => $this->parseId(trim($id)),
+                'parser' => $parserId,
                 'package_name' => trim($title),
                 'html' => $package->html(),
                 'provider_name' => $companyName,
@@ -195,9 +201,10 @@ class Scraper
                 'date' => Carbon::now()->format('Y-m-d'),
                 'package_sim_connection_price' => $simPrice,
                 'minutes_to_other_countries' => $otherCountries,
-                'package_min_lines' => 1
+                'package_min_lines' => 1,
+                'logo' => $logo,
+                'other_details' => $otherDetails
             ]));
-
         });
         return $result;
     }

@@ -159,6 +159,14 @@
                             {{ $scanDataCellular->logo }}
                         </td>
                     </tr>
+                    <tr>
+                        <th>
+                            {{ trans('cruds.scanDataCellular.fields.other_details') }}
+                        </th>
+                        <td>
+                            {{ $scanDataCellular->other_details }}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
             <div class="form-group">
@@ -176,14 +184,14 @@
     </div>
     <ul class="nav nav-tabs" role="tablist" id="relationship-tabs">
         <li class="nav-item">
-            <a class="nav-link" href="#scan_data_cellular_user_datas" role="tab" data-toggle="tab">
+            <a class="nav-link" href="#scan_data_cellulars_user_datas" role="tab" data-toggle="tab">
                 {{ trans('cruds.userData.title') }}
             </a>
         </li>
     </ul>
     <div class="tab-content">
-        <div class="tab-pane" role="tabpanel" id="scan_data_cellular_user_datas">
-            @includeIf('admin.scanDataCellulars.relationships.scanDataCellularUserDatas', ['userDatas' => $scanDataCellular->scanDataCellularUserDatas])
+        <div class="tab-pane" role="tabpanel" id="scan_data_cellulars_user_datas">
+            @includeIf('admin.scanDataCellulars.relationships.scanDataCellularsUserDatas', ['userDatas' => $scanDataCellular->scanDataCellularsUserDatas])
         </div>
     </div>
 </div>

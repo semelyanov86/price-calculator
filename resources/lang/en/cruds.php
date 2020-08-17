@@ -18,7 +18,7 @@ return [
             'updated_at'        => 'Updated at',
             'updated_at_helper' => '',
             'deleted_at'        => 'Deleted at',
-            'deleted_at_helper' => '',
+            'deleted_at_helper' => ''
         ],
     ],
     'role'             => [
@@ -133,8 +133,8 @@ return [
             'updated_at_helper'         => '',
             'deleted_at'                => 'Deleted at',
             'deleted_at_helper'         => '',
-            'scan_data_cellular'        => 'Scan Data Cellular',
-            'scan_data_cellular_helper' => 'Choosed package name',
+            'scan_data_cellulars'        => 'Scan Data Cellular',
+            'scan_data_cellulars_helper' => 'Choosed package name',
         ],
     ],
     'scanDataCellular' => [
@@ -183,6 +183,7 @@ return [
             'minutes_to_other_countries_helper'   => '',
             'logo'                                => 'Logo',
             'logo_helper'                         => '',
+            'other_details' => 'Other Details'
         ],
     ],
 ];

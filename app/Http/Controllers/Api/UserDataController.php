@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUserDataApiRequest;
 use App\Http\Resources\UserDataResource;
+use App\Jobs\OrderCreatedNotification;
 use App\UserData;
 use Illuminate\Http\Request;
 
@@ -31,5 +32,14 @@ class UserDataController extends Controller
         $userDataModel->data = json_encode($params);
         $userDataModel->save();
         return new UserDataResource($userDataModel);
+    }
+
+    public function order(Request $request, UserData $userData)
+    {
+        $orderId = $request->get('scan');
+        $userData->scan_data_cellulars_id = $orderId;
+        $userData->save();
+        OrderCreatedNotification::dispatchNow($userData);
+        return new UserDataResource($userData);
     }
 }

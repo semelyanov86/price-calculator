@@ -17,7 +17,8 @@ class UserDataResource extends JsonResource
         return [
             'id' => $this->id,
             'type' => $this->type,
-            'data' => $this->data
+            'data' => $this->data,
+            'scan' => $this->scan_data_cellulars_id
         ];
     }
 }

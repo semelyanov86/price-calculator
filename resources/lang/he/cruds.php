@@ -183,6 +183,7 @@ return [
             'minutes_to_other_countries_helper'   => '',
             'logo'                                => 'Logo',
             'logo_helper'                         => '',
+            'other_details' => 'Other Details'
         ],
     ],
 ];

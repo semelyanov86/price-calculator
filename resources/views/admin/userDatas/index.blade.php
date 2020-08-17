@@ -32,7 +32,7 @@
                             {{ trans('cruds.userData.fields.data') }}
                         </th>
                         <th>
-                            {{ trans('cruds.userData.fields.scan_data_cellular') }}
+                            {{ trans('cruds.userData.fields.scan_data_cellulars') }}
                         </th>
                         <th>
                             &nbsp;
@@ -55,9 +55,7 @@
                                 {{ $userData->data ?? '' }}
                             </td>
                             <td>
-                                @foreach($userData->scan_data_cellulars as $key => $item)
-                                    <span class="badge badge-info">{{ $item->package_name }}</span>
-                                @endforeach
+                                {{ $userData->scan_data_cellulars->package_name ?? '' }}
                             </td>
                             <td>
                                 @can('user_data_show')

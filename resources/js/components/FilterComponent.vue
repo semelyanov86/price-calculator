@@ -6,7 +6,7 @@
                  :is-full-page="fullPage"></loading>
         <form @submit.prevent="submit_form">
             <div class="form-group">
-                <label for="company_id">Choose company</label>
+                <label for="company_id">{{ __("site.choose-company") }}</label>
                 <select class="form-control" id="company_id" v-model="choosedCompany">
                     <option :value="company.provider_name" v-for="company in companies" :key="company.id">{{company.provider_name}}</option>
                 </select>
@@ -15,7 +15,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="lines">Choose number of lines</label>
+                <label for="lines">{{ __("site.no-of-lines") }}</label>
                 <select class="form-control" id="lines" :value="lines" v-on:change="changeLines($event)">
                     <option value="1">1</option>
                     <option value="2">2</option>
@@ -29,49 +29,49 @@
             </div>
             <div class="form-row" v-for="cur in lines">
                 <div class="form-group col-md-2">
-                    <label :for="'phone' + cur">Phone number</label>
+                    <label :for="'phone' + cur">{{ __("site.phone-number") }}</label>
                     <input :id="'phone' + cur" type="tel" class="form-control" name="phone[]" v-model="phone[cur]">
                     <div class="alert alert-danger" v-if="errors && errors.phone">
                         {{ errors.phone[0] }}
                     </div>
                 </div>
                 <div class="form-group col-md-2">
-                    <label :for="'minutes' + cur">Number of minutes</label>
+                    <label :for="'minutes' + cur">{{ __("site.number-of-minutes") }}</label>
                     <input :id="'minutes' + cur" type="number" class="form-control" name="minutes[]" v-model="minutes[cur]">
                     <div class="alert alert-danger" v-if="errors && errors.minutes">
                         {{ errors.minutes[0] }}
                     </div>
                 </div>
                 <div class="form-group col-md-2">
-                    <label :for="'sms' + cur">SMS</label>
+                    <label :for="'sms' + cur">{{ __("site.sms") }}</label>
                     <input :id="'sms' + cur" type="number" class="form-control" name="sms[]" v-model="sms[cur]">
                     <div class="alert alert-danger" v-if="errors && errors.sms">
                         {{ errors.sms[0] }}
                     </div>
                 </div>
                 <div class="form-group col-md-2">
-                    <label :for="'gb' + cur">GB</label>
+                    <label :for="'gb' + cur">{{ __("site.gb") }}</label>
                     <input :id="'gb' + cur" type="number" class="form-control" name="gb[]" v-model="gb[cur]">
                     <div class="alert alert-danger" v-if="errors && errors.gb">
                         {{ errors.gb[0] }}
                     </div>
                 </div>
                 <div class="form-group col-md-2">
-                    <label :for="'roaming' + cur">Calls to other countries</label>
+                    <label :for="'roaming' + cur">{{ __('site.calls-to-countries') }}</label>
                     <input :id="'roaming' + cur" type="number" class="form-control" name="roaming[]" v-model="roaming[cur]">
                     <div class="alert alert-danger" v-if="errors && errors.roaming">
                         {{ errors.roaming[0] }}
                     </div>
                 </div>
                 <div class="form-group col-md-2">
-                    <label :for="'price' + cur">Your current price</label>
+                    <label :for="'price' + cur">{{ __('site.your-current-price') }}</label>
                     <input :id="'price' + cur" type="number" class="form-control" name="price[]" v-model="price[cur]">
                     <div class="alert alert-danger" v-if="errors && errors.price">
                         {{ errors.price[0] }}
                     </div>
                 </div>
             </div>
-            <button class="btn btn-primary" type="submit">Search</button>
+            <button class="btn btn-primary" type="submit">{{ __('site.Search') }}</button>
         </form>
     </div>
 </template>

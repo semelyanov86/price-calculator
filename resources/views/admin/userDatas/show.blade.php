@@ -41,12 +41,14 @@
                     </tr>
                     <tr>
                         <th>
-                            {{ trans('cruds.userData.fields.scan_data_cellular') }}
+                            {{ trans('cruds.userData.fields.scan_data_cellulars') }}
                         </th>
                         <td>
-                            @foreach($userData->scan_data_cellulars as $key => $scan_data_cellular)
-                                <span class="label label-info">{{ $scan_data_cellular->package_name }}</span>
-                            @endforeach
+                            @if ($userData->scan_data_cellulars)
+                                {{ $userData->scan_data_cellulars->package_name ?? '' }}
+
+                            @endif
+
                         </td>
                     </tr>
                 </tbody>

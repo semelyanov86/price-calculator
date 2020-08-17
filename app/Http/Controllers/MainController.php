@@ -21,6 +21,7 @@ class MainController extends Controller
     public function show(UserData $data)
     {
         $id = $data->id;
+        $choosed = $data->scan_data_cellulars_id;
         $data = $data->data;
         $filters = json_decode($data, true);
         $lines = $filters['lines'];
@@ -28,18 +29,18 @@ class MainController extends Controller
         $cellulars = collect([]);
         $ownCellulars = collect([]);
         for ($i = 1; $i <= $lines; $i++) {
-            $cellularsQuery = ScanDataCellular::select(array('date', 'html_changed_datetime', 'package_change_price', 'package_gb', 'package_min_lines', 'package_minutes', 'package_month_price', 'package_name', 'package_sim_connection_price', 'package_sim_price', 'package_sms', 'id', 'provider_name', 'parser', 'minutes_to_other_countries'))->filtering($filters, $i);
+            $cellularsQuery = ScanDataCellular::select(array('date', 'html_changed_datetime', 'package_change_price', 'package_gb', 'package_min_lines', 'package_minutes', 'package_month_price', 'package_name', 'package_sim_connection_price', 'package_sim_price', 'package_sms', 'id', 'provider_name', 'parser', 'minutes_to_other_countries', 'logo', 'other_details'))->filtering($filters, $i);
             $cellularsQuery->where('provider_name', '!=', $filters['choosedCompany']);
             $cellularsTmp = $cellularsQuery->orderBy('package_month_price')->limit(3)->get();
             $cellulars = $cellulars->merge($cellularsTmp);
         }
         for ($i = 1; $i <= $lines; $i++) {
-            $ownCellularsQuery = ScanDataCellular::select(array('date', 'html_changed_datetime', 'package_change_price', 'package_gb', 'package_min_lines', 'package_minutes', 'package_month_price', 'package_name', 'package_sim_connection_price', 'package_sim_price', 'package_sms', 'id', 'provider_name', 'parser', 'minutes_to_other_countries'))->filtering($filters, $i);
+            $ownCellularsQuery = ScanDataCellular::select(array('date', 'html_changed_datetime', 'package_change_price', 'package_gb', 'package_min_lines', 'package_minutes', 'package_month_price', 'package_name', 'package_sim_connection_price', 'package_sim_price', 'package_sms', 'id', 'provider_name', 'parser', 'minutes_to_other_countries', 'logo', 'other_details'))->filtering($filters, $i);
             $ownCellularsQuery->where('provider_name', '=', $filters['choosedCompany']);
             $ownCellularsTmp = $ownCellularsQuery->orderBy('package_month_price')->limit(1)->get();
             $ownCellulars = $ownCellulars->merge($ownCellularsTmp);
         }
 
-        return view('search', compact('companies', 'cellulars', 'ownCellulars', 'id', 'data'));
+        return view('search', compact('companies', 'cellulars', 'ownCellulars', 'id', 'data', 'choosed'));
     }
 }

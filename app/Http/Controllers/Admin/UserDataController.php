@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MassDestroyUserDataRequest;
 use App\Http\Requests\StoreUserDataRequest;
 use App\Http\Requests\UpdateUserDataRequest;
+use App\ScanDataCellular;
 use App\UserData;
 use Gate;
 use Illuminate\Http\Request;
@@ -26,7 +27,9 @@ class UserDataController extends Controller
     {
         abort_if(Gate::denies('user_data_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.userDatas.create');
+        $scan_data_cellulars = ScanDataCellular::all()->pluck('package_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        return view('admin.userDatas.create', compact('scan_data_cellulars'));
     }
 
     public function store(StoreUserDataRequest $request)
@@ -40,7 +43,11 @@ class UserDataController extends Controller
     {
         abort_if(Gate::denies('user_data_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return view('admin.userDatas.edit', compact('userData'));
+        $scan_data_cellulars = ScanDataCellular::all()->pluck('package_name', 'id')->prepend(trans('global.pleaseSelect'), '');
+
+        $userData->load('scan_data_cellulars');
+
+        return view('admin.userDatas.edit', compact('scan_data_cellulars', 'userData'));
     }
 
     public function update(UpdateUserDataRequest $request, UserData $userData)
@@ -53,6 +60,8 @@ class UserDataController extends Controller
     public function show(UserData $userData)
     {
         abort_if(Gate::denies('user_data_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $userData->load('scan_data_cellulars');
 
         return view('admin.userDatas.show', compact('userData'));
     }
