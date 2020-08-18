@@ -3,10 +3,10 @@
 return [
     'header' => 'מחשבון SAVD',
     'no_data' => 'לא נמצאו חבילות. אנא שנה תנאי חיפוש',
-    'cellulars_company' => 'Cellulars for your company',
+    'cellulars_company' => 'חבילות בחברה שלך',
     'title' => 'חפש חבלה',
-    'parameter' => 'Parameter',
-    'value' => 'Value',
+    'parameter' => 'שדה',
+    'value' => 'ערך',
     'package-change-price' => 'מחיר שינוי חבילה',
     'package-month-price' => 'מחיר חודשי',
     'package-min-lines' => 'מספר קווים מינימלי',
@@ -31,7 +31,7 @@ return [
     'package-interested-text' => 'מעוניינים להזמין חבילה זאת?',
     'make-order' => 'הזמינו עכשיו',
     'already-ordered' => 'הזמנתם חבילה זאת בעבר',
-    'unlimit' => 'Unlimit',
+    'unlimit' => 'ללא הגבלה',
     'money-sign' => '₪',
-    'minutes' => 'minutes'
+    'minutes' => 'דקות'
 ];
