@@ -26,7 +26,9 @@
         }
     </style>
 </head>
-<body>
+<body @if (app()->getLocale() === 'he')
+    class="rtl"
+    @endif>
 <script>
     window._locale = '{{ app()->getLocale() }}';
     window._translations = {!! cache('translations') !!};

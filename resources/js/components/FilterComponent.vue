@@ -5,26 +5,28 @@
                  :can-cancel="true"
                  :is-full-page="fullPage"></loading>
         <form @submit.prevent="submit_form">
-            <div class="form-group">
-                <label for="company_id">{{ __("site.choose-company") }}</label>
-                <select class="form-control" id="company_id" v-model="choosedCompany">
-                    <option :value="company.provider_name" v-for="company in companies" :key="company.id">{{company.provider_name}}</option>
-                </select>
-                <div class="alert alert-danger" v-if="errors && errors.provider_name">
-                    {{ errors.provider_name[0] }}
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="company_id">{{ __("site.choose-company") }}</label>
+                    <select class="form-control" id="company_id" v-model="choosedCompany">
+                        <option :value="company.provider_name" v-for="company in companies" :key="company.id">{{company.provider_name}}</option>
+                    </select>
+                    <div class="alert alert-danger" v-if="errors && errors.provider_name">
+                        {{ errors.provider_name[0] }}
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="lines">{{ __("site.no-of-lines") }}</label>
-                <select class="form-control" id="lines" :value="lines" v-on:change="changeLines($event)">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-                <div class="alert alert-danger" v-if="errors && errors.lines">
-                    {{ errors.lines[0] }}
+                <div class="form-group col-md-6">
+                    <label for="lines">{{ __("site.no-of-lines") }}</label>
+                    <select class="form-control" id="lines" :value="lines" v-on:change="changeLines($event)">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <div class="alert alert-danger" v-if="errors && errors.lines">
+                        {{ errors.lines[0] }}
+                    </div>
                 </div>
             </div>
             <div class="form-row" v-for="cur in lines">

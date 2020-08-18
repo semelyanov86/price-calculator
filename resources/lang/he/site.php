@@ -30,5 +30,8 @@ return [
     'package-interested-header' => 'חבילות נוספות',
     'package-interested-text' => 'מעוניינים להזמין חבילה זאת?',
     'make-order' => 'הזמינו עכשיו',
-    'already-ordered' => 'הזמנתם חבילה זאת בעבר'
+    'already-ordered' => 'הזמנתם חבילה זאת בעבר',
+    'unlimit' => 'Unlimit',
+    'money-sign' => '₪',
+    'minutes' => 'minutes'
 ];

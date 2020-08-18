@@ -11,3 +11,20 @@
 @import '~@fortawesome/fontawesome-free/scss/regular';
 @import '~@fortawesome/fontawesome-free/scss/solid';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
+
+.rtl {
+    margin-bottom: 29px;
+    direction: rtl;
+    text-align: right!important;
+}
+
+.rtl .navbar-brand {
+    margin-right: 0rem!important;
+}
+
+.detailsContainer p {
+    margin-bottom: 0rem!important;
+}
+.detailsContainer p {
+    line-height: 170%!important;
+}

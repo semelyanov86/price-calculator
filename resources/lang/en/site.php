@@ -30,5 +30,8 @@ return [
     'package-interested-header' => 'Order package',
     'package-interested-text' => 'If you are interested it this package, press the button',
     'make-order' => 'Make Order',
-    'already-ordered' => 'You already ordered this package'
+    'already-ordered' => 'You already ordered this package',
+    'unlimit' => 'Unlimit',
+    'money-sign' => '₪',
+    'minutes' => 'minutes'
 ];
