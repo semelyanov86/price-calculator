@@ -38657,6 +38657,7 @@ var render = function() {
               attrs: { href: "#" },
               on: {
                 click: function($event) {
+                  $event.preventDefault()
                   _vm.isActive = !_vm.isActive
                 }
               }

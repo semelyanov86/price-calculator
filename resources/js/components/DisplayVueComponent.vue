@@ -57,7 +57,7 @@
                 </div>
             </div>
             <div class="d-block d-sm-none text-left mt-3">
-                <a href="#" style="text-decoration: underline; font-size: 16px;" v-on:click="isActive = !isActive">{{ __('site.more-details') }}</a>
+                <a href="#" style="text-decoration: underline; font-size: 16px;" v-on:click.prevent="isActive = !isActive">{{ __('site.more-details') }}</a>
             </div>
             <div class="mt-2" v-show="isActive">
                 <div class="row">
