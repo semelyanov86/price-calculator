@@ -33,5 +33,7 @@ return [
     'already-ordered' => 'You already ordered this package',
     'unlimit' => 'Unlimit',
     'money-sign' => '₪',
-    'minutes' => 'minutes'
+    'minutes' => 'minutes',
+    'search-again' => 'Search Again',
+    'more-details' => 'More Details'
 ];

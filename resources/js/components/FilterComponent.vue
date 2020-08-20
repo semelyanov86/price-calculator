@@ -4,7 +4,8 @@
         <loading :active.sync="isLoading"
                  :can-cancel="true"
                  :is-full-page="fullPage"></loading>
-        <form @submit.prevent="submit_form">
+        <button type="button" class="btn btn-primary btn-lg btn-block" v-show="shouldCollapse" v-on:click="collapsable = false">{{ __('site.search-again') }}</button>
+        <form @submit.prevent="submit_form" v-if="!shouldCollapse">
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="company_id">{{ __("site.choose-company") }}</label>
@@ -73,7 +74,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-primary" type="submit">{{ __('site.Search') }}</button>
+            <button class="btn btn-primary sm-block" type="submit">{{ __('site.Search') }}</button>
         </form>
     </div>
 </template>
@@ -99,7 +100,8 @@
                 isLoading: false,
                 record: null,
                 fullPage: true,
-                errors: {}
+                errors: {},
+                collapsable: true
             }
         },
         props: {
@@ -149,6 +151,9 @@
                 } else {
                     return '/api/data';
                 }
+            },
+            shouldCollapse() {
+                return this.collapsable && this.id != '';
             }
         },
         methods: {
@@ -206,5 +211,7 @@
 </script>
 
 <style scoped>
-
+@media all and (max-width:480px) {
+    .sm-block { width: 100%; display:block; }
+}
 </style>

@@ -33,5 +33,7 @@ return [
     'already-ordered' => 'הזמנתם חבילה זאת בעבר',
     'unlimit' => 'ללא הגבלה',
     'money-sign' => '₪',
-    'minutes' => 'דקות'
+    'minutes' => 'דקות',
+    'search-again' => 'חיפוש חדש',
+    'more-details' => 'פרטים נוספים'
 ];

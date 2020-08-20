@@ -11,11 +11,14 @@
                 </div>
             </div>
 
+            <div class="d-sm-none text-center mb-3" style="cursor: pointer" v-on:click="isActive = !isActive">
+                <img :src="item.logo" style="max-height: 80px;" :alt="item.provider_name">
+            </div>
             <div class="row" style="cursor: pointer" v-on:click="isActive = !isActive">
                 <div :class="getArrowAlignOpposite">
                     <img :src="item.logo" style="max-height: 80px;" :alt="item.provider_name">
                 </div>
-                <div class="col-sm-2 text-center">
+                <div class="col-3 col-sm-2 text-center">
                 <span class="superIcon">
                     <i class="fas fa-coins"></i>
                 </span>
@@ -23,7 +26,7 @@
                         {{item.package_month_price}} {{__('site.money-sign')}}
                     </div>
                 </div>
-                <div class="col-sm-2  text-center">
+                <div class="col-3 col-sm-2  text-center">
                 <span class="superIcon">
                     <i class="fas fa-sms"></i>
                 </span>
@@ -31,7 +34,7 @@
                         {{getNumDisplayValue(item.package_sms)}} {{__('site.sms')}}
                     </div>
                 </div>
-                <div class="col-sm-2  text-center">
+                <div class="col-3 col-sm-2  text-center">
                 <span class="superIcon">
                     <i class="fas fa-phone"></i>
                 </span>
@@ -39,7 +42,7 @@
                         {{getNumDisplayValue(item.package_minutes)}} {{__('site.minutes')}}
                     </div>
                 </div>
-                <div class="col-sm-2  text-center">
+                <div class="col-3 col-sm-2  text-center">
                 <span class="superIcon">
                     <i class="fas fa-wifi"></i>
                 </span>
@@ -53,9 +56,12 @@
                 </span>
                 </div>
             </div>
+            <div class="d-block d-sm-none text-left mt-3">
+                <a href="#" style="text-decoration: underline; font-size: 16px;" v-on:click="isActive = !isActive">{{ __('site.more-details') }}</a>
+            </div>
             <div class="mt-2" v-show="isActive">
                 <div class="row">
-                    <div class="col-4 align-items-center mt-3">
+                    <div class="col-sm-4 align-items-center mt-3 order-2 order-sm-1">
                         <div>
                             <div class="card">
                                 <div class="card-body">
@@ -69,10 +75,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-8">
+                    <div class="col-sm-8 order-1 order-sm-2">
                         <div class="container detailsContainer" v-html="item.other_details">
                         </div>
-                        <a href="#" class="text-decoration-none mr-2" v-on:click.prevent="isMore = true" v-if="!isMore">{{ __('site.show-more') }}</a>
+                        <a href="#" class="text-decoration-none mr-2 d-none d-sm-block" v-on:click.prevent="isMore = true" v-if="!isMore">{{ __('site.show-more') }}</a>
                         <table class="table table-hover" v-if="isMore">
                             <thead>
                             <tr>
@@ -180,16 +186,16 @@ import 'vue-loading-overlay/dist/vue-loading.css';
             },
             getArrowAlign() {
                 if (window._locale == 'he') {
-                    return ['col-sm-2', 'text-left'];
+                    return ['col-sm-2', 'text-left', 'd-none', 'd-sm-block'];
                 } else {
-                    return ['col-sm-2', 'text-right'];
+                    return ['col-sm-2', 'text-right', 'd-none', 'd-sm-block'];
                 }
             },
             getArrowAlignOpposite() {
                 if (window._locale == 'he') {
-                    return ['col-sm-2', 'text-right'];
+                    return ['col-sm-2', 'text-right', 'd-none', 'd-sm-block'];
                 } else {
-                    return ['col-sm-2', 'text-left'];
+                    return ['col-sm-2', 'text-left', 'd-none', 'd-sm-block'];
                 }
             },
         },
