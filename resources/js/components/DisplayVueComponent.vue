@@ -5,13 +5,13 @@
                  :can-cancel="true"
                  :is-full-page="fullPage"></loading>
         <div class="card-body">
-            <div class="row">
+            <div class="row" style="cursor: pointer" v-on:click="isActive = !isActive">
                 <div class="col-sm-10">
                     <h5 class="card-title">{{item.package_name}}</h5>
                 </div>
             </div>
 
-            <div class="row"  v-on:click="isActive = !isActive">
+            <div class="row" style="cursor: pointer" v-on:click="isActive = !isActive">
                 <div :class="getArrowAlignOpposite">
                     <img :src="item.logo" style="max-height: 80px;" :alt="item.provider_name">
                 </div>

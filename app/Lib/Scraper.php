@@ -184,7 +184,7 @@ class Scraper
             $otherCountries = $this->getIntValue($otherCountriesCollection);
 
             $logoCollection = $package->filter('.company_img_xs')->first()->filter('img')->first();
-            $logo = parse_url($this->url, PHP_URL_SCHEME) . '://' . parse_url($this->url, PHP_URL_HOST) . $logoCollection->attr('src');
+            $logo = $logoCollection->attr('src');
 
             $otherDetails = $package->filter('#moreinfo' . $parserId)->first()->html();
 

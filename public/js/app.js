@@ -38459,18 +38459,31 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("div", { staticClass: "card-body" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-10" }, [
-            _c("h5", { staticClass: "card-title" }, [
-              _vm._v(_vm._s(_vm.item.package_name))
+        _c(
+          "div",
+          {
+            staticClass: "row",
+            staticStyle: { cursor: "pointer" },
+            on: {
+              click: function($event) {
+                _vm.isActive = !_vm.isActive
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "col-sm-10" }, [
+              _c("h5", { staticClass: "card-title" }, [
+                _vm._v(_vm._s(_vm.item.package_name))
+              ])
             ])
-          ])
-        ]),
+          ]
+        ),
         _vm._v(" "),
         _c(
           "div",
           {
             staticClass: "row",
+            staticStyle: { cursor: "pointer" },
             on: {
               click: function($event) {
                 _vm.isActive = !_vm.isActive
