@@ -1,4 +1,5 @@
-# savd.co.il
+# Project Information
+This project allows us to parser of cellular products and choose the best one based on searching data.
 
 # Installation instructions
 
