@@ -45,9 +45,10 @@ class NewOrderCreated extends Notification
     {
         $url = url('admin/user-datas/' . $this->userDataModel->id);
         return (new MailMessage)
-            ->subject('New order ' . $this->userDataModel->id)
+            ->subject('New order from SAVD, order ID - ' . $this->userDataModel->id)
             ->greeting('Hello!')
-                    ->line('User ordered a product')
+                    ->line('New order from savd')
+                    ->line('Package name: ' . $this->userDataModel->scan_data_cellulars->package_name)
                     ->action('View Order', $url)
                     ->line('Thank you for using our application!');
     }
