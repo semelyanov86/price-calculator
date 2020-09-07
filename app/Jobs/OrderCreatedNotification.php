@@ -34,7 +34,12 @@ class OrderCreatedNotification implements ShouldQueue
      */
     public function handle()
     {
-        $admin_user = User::whereId(1)->first();
-        $admin_user->notify(new NewOrderCreated($this->userDataModel));
+        $users = User::all();
+        foreach ($users as $admin_user) {
+            if ($admin_user->roles()->where('id', 1)->exists()) {
+                $admin_user->notify(new NewOrderCreated($this->userDataModel));
+            }
+        }
+//        $admin_user = User::whereId(1)->first();
     }
 }
